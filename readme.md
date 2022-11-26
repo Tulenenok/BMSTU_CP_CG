@@ -3,6 +3,7 @@
 ---
 
 * Как залить себе в ветку актуальный main
+
   ```bash
   git pull main
   git rebase main
