@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.23)
+project(c_version)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+
+find_package(Qt5 COMPONENTS
+        Core
+        Gui
+        Widgets
+        REQUIRED)
+
+add_executable(c_version main.cpp mainwindow.cpp mainwindow.h mainwindow.ui handle_buttons.cpp handle_buttons.h server/color_t.cpp server/color_t.h server/triangle_t.cpp server/triangle_t.h server/vertex_t.cpp server/vertex_t.h server/triangle_vector.cpp server/triangle_vector.h server/screen_properties_t.cpp server/screen_properties_t.h server/screen_t.cpp server/screen_t.h server/shading.cpp server/shading.h server/z_buffer.cpp server/z_buffer.h)
+target_link_libraries(c_version
+        Qt5::Core
+        Qt5::Gui
+        Qt5::Widgets
+        )
+
