@@ -2,7 +2,7 @@
 #include <QStyleFactory>
 #include <iostream>
 
-#include "mainwindow.h"
+#include "ui/mainwindow.h"
 
 int main(int argc, char *argv[])
 {

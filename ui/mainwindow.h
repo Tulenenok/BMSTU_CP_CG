@@ -8,7 +8,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 
-#include "handle_buttons.h"
+#include "../connect/handle_buttons.h"
 
 
 QT_BEGIN_NAMESPACE

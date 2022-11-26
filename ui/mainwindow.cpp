@@ -6,10 +6,10 @@
 #include "mainwindow.h"
 #include "ui_MainWindow.h"
 
-#include "server/screen_t.h"
-#include "server/screen_properties_t.h"
-#include "server/triangle_t.h"
-#include "server/z_buffer.h"
+#include "../server/screen_t.h"
+#include "../server/screen_properties_t.h"
+#include "../server/triangle_t.h"
+#include "../server/z_buffer.h"
 
 int my_random(int a,int b)
 {
