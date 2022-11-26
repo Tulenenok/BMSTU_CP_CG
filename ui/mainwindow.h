@@ -9,6 +9,7 @@
 #include <QPushButton>
 
 #include "../connect/handle_buttons.h"
+#include "../server/screen_t.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -22,7 +23,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    void fillScreen(int **screen_matrix);
+    void fillScreen();
+    screen_t *screen_matrix;
 
 private slots:
     void on_LoadButton_clicked();
@@ -31,8 +33,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
-    QImage DataToQImage(int width, int height, int length, char *data);
 };
 
 
