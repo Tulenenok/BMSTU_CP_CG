@@ -1,6 +1,4 @@
 #include <QApplication>
-#include <QStyleFactory>
-#include <iostream>
 
 #include "ui/mainwindow.h"
 
