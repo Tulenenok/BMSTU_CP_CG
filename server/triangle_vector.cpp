@@ -6,6 +6,7 @@
 
 #include "triangle_vector.h"
 #include "triangle_t.h"
+#include "shading.h"
 
 void group_reset_processed_vertexes(std::vector<triangle_t*> triangles) {
     for (int i = 0; i < triangles.size(); i++) {
@@ -30,16 +31,16 @@ void group_center(std::vector<triangle_t*> triangles, vertex_t center) {
         }
     } else {
         for (int i = 0; i < 3; i++) {
-            mins[i] = triangles[0]->processed_vertexes[0][i];
-            maxs[i] = triangles[0]->processed_vertexes[0][i];
+            mins[i] = triangles[0]->initial_vertexes[0][i];
+            maxs[i] = triangles[0]->initial_vertexes[0][i];
         }
     }
 
     for (int i = 0; i < triangles.size(); i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
-                mins[k] = mins[k] > triangles[i]->processed_vertexes[j][k] ? triangles[i]->processed_vertexes[j][k] : mins[k];
-                maxs[k] = maxs[k] < triangles[i]->processed_vertexes[j][k] ? triangles[i]->processed_vertexes[j][k] : maxs[k];
+                mins[k] = mins[k] > triangles[i]->initial_vertexes[j][k] ? triangles[i]->initial_vertexes[j][k] : mins[k];
+                maxs[k] = maxs[k] < triangles[i]->initial_vertexes[j][k] ? triangles[i]->initial_vertexes[j][k] : maxs[k];
             }
         }
     }
@@ -67,6 +68,12 @@ void group_rotate(std::vector<triangle_t*> triangles, vertex_t center, double dx
     }
 }
 
-void group_add(std::vector<triangle_t*> triangles, triangle_t* triangle) {
+void group_add(std::vector<triangle_t*> &triangles, triangle_t* triangle) {
     triangles.push_back(triangle);
+}
+
+void group_shading(std::vector<triangle_t*> &triangles, std::vector<light_source_t*> &light_sources) {
+    for (int i = 0; i < triangles.size(); i++) {
+        linear_shading(triangles[i], light_sources);
+    }
 }

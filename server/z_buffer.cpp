@@ -168,12 +168,18 @@ void complete_process_level(screen_t *screen, std::vector<triangle_t*> triangles
             process_level(triangles[i], screen, y, depth_array);
         }
 
+        for (int x = 0; x < screen->width; x++) {
+            if (not screen->change[x][y] && depth_array[x] == INT_MAX) {
+                color_pixel(screen, &(screen->default_color), x, y);
+            }
+        }
+
         free(depth_array);
     }
 }
 
-void z_buffer_render(screen_t *screen, std::vector<triangle_t*> triangles) {
-
+void z_buffer_render(screen_t *screen, std::vector<triangle_t*> triangles)
+{
     for (int y = screen->height - 1; y >= 0; y--){
         complete_process_level(screen, triangles, y);
     }

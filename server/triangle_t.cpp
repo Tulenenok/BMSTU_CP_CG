@@ -207,14 +207,29 @@ void rotate(triangle_t *triangle, vertex_t center, double dx, double dy, double 
     push(triangle, -center[0], -center[1], -center[2]);
 
 
-    double x, y, z;
+    double x, y, z, nx, ny, nz;
     for (int i = 0; i < 3; i++) {
         x = triangle->processed_vertexes[i][0];
         y = triangle->processed_vertexes[i][1];
         z = triangle->processed_vertexes[i][2];
-        triangle->processed_vertexes[i][0] = (int) ((cos(dx) * cos(dz) - sin(dx) * cos(dy) * sin(dz)) * x - (sin(dx) * cos(dz) + cos(dx) * cos(dy) * sin(dz)) * y + sin(dy) * sin(dz) * z);
-        triangle->processed_vertexes[i][1] = (int) ((cos(dx) * sin(dz) + sin(dx) * cos(dy) * cos(dz)) * x - (sin(dx) * sin(dz) - cos(dx) * cos(dy) * cos(dz)) * y - sin(dy) * cos(dz) * z);
-        triangle->processed_vertexes[i][2] = (int) (sin(dx) * sin(dy) * x + cos(dx) * sin(dy) * y + cos(dy) * z);
+//        triangle->processed_vertexes[i][0] = (int) ((cos(dx) * cos(dz) - sin(dx) * cos(dy) * sin(dz)) * x - (sin(dx) * cos(dz) + cos(dx) * cos(dy) * sin(dz)) * y + sin(dy) * sin(dz) * z);
+//        triangle->processed_vertexes[i][1] = (int) ((cos(dx) * sin(dz) + sin(dx) * cos(dy) * cos(dz)) * x - (sin(dx) * sin(dz) - cos(dx) * cos(dy) * cos(dz)) * y - sin(dy) * cos(dz) * z);
+//        triangle->processed_vertexes[i][2] = (int) (sin(dx) * sin(dy) * x + cos(dx) * sin(dy) * y + cos(dy) * z);
+        nx = x;
+        ny = y * cos(dx) + z * sin(dx);
+        nz = -y * sin(dx) + z * cos(dx);
+
+        x = nx * cos(dy) - nz * sin(dy);
+        y = ny;
+        z = nx * sin(dy) + nz * cos(dy);
+
+        nx = x * cos(dz) + y * sin(dz);
+        ny = -x * sin(dz) + y * cos(dz);
+        nz = z;
+
+        triangle->processed_vertexes[i][0] = (int) nx;
+        triangle->processed_vertexes[i][1] = (int) ny;
+        triangle->processed_vertexes[i][2] = (int) nz;
     }
 
     push(triangle, center[0], center[1], center[2]);

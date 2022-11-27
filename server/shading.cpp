@@ -6,14 +6,17 @@
 
 #include "shading.h"
 #include "color_t.h"
+#include "light_source.h"
 
 // У треугольника должен быть определен центр
-void linear_shading(triangle_t *triangle, std::vector<vertex_t> light_sources) {
+void linear_shading(triangle_t *triangle, std::vector<light_source_t*> &light_sources) {
 
     if (light_sources.empty()) {
         triangle->processed_color.r = triangle->initial_color.r;
         triangle->processed_color.g = triangle->initial_color.g;
         triangle->processed_color.b = triangle->initial_color.b;
+
+        return;
     }
 
     double sum_k = 0.0;
@@ -32,9 +35,9 @@ void linear_shading(triangle_t *triangle, std::vector<vertex_t> light_sources) {
     double x, y, z, length, k;
 
     for (int ls_ind = 0; ls_ind < light_sources.size(); ls_ind++) {
-        x = light_sources[ls_ind][0] - triangle->center[0];
-        y = light_sources[ls_ind][1] - triangle->center[1];
-        z = light_sources[ls_ind][2] - triangle->center[2];
+        x = light_sources[ls_ind]->vertex[0] - triangle->center[0];
+        y = light_sources[ls_ind]->vertex[1] - triangle->center[1];
+        z = light_sources[ls_ind]->vertex[2] - triangle->center[2];
 
         length = sqrt(x * x + y * y + z * z);
 
