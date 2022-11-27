@@ -40,7 +40,7 @@ void MainWindow::on_LoadButton_clicked() {
 }
 
 void MainWindow::on_DrawButton_clicked() {
-    server_test_draw_triangle(screen_matrix);
+    server_test_draw_2_triangle(screen_matrix);
     fillScreen();
 
     handleButton(DRAW);

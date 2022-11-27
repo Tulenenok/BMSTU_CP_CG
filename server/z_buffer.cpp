@@ -3,6 +3,7 @@
 //
 
 #include <cmath>
+#include <iostream>
 #include "z_buffer.h"
 
 //Фунуция работает не с изначальными координатами вершин, а с измененными!!!
@@ -28,11 +29,13 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
 
 //  Если треугольник целиком выше или ниже уровня
     if (y < triangle->processed_vertexes[min_y_ind][1] || y > triangle->processed_vertexes[max_y_ind][1]) {
+        std::cout << "y" << y << "pos 1" << std::endl;
         return;
     }
 
 //   Если треугольник выраждается в точку или линию - пропускаем этот треугольник
     if (max_x_ind == min_x_ind || max_y_ind == min_y_ind) {
+        std::cout << "y" << y << "pos 2" << std::endl;
         return;
     }
 
@@ -48,6 +51,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
             }
         }
 
+        std::cout << "y" << y << "pos 3" << std::endl;
         return;
     }
 
@@ -56,22 +60,12 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
     double start_z;
     double finish_z;
 
-    if (y > ymid && fabs(ymin - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
+//    if (y > ymid && fabs(ymin - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
+    if (y > ymid) {
 
-        double d_ya = ymin - ymid;
-        double d_xa = xmin - xmid;
-        double d_za = zmin - zmid;
-        start_x = xmid + d_xa * (y - ymid) / d_ya;
-        start_z = zmid + d_za * (y - ymid) / d_ya;
+        std::cout << y << " higher" << std::endl;
 
-        double d_yb = ymin - ymax;
-        double d_xb = xmin - xmax;
-        double d_zb = zmin - zmax;
-        finish_x = xmax + d_xb * (y - ymax) / d_yb;
-        finish_z = zmax + d_zb * (y - ymax) / d_yb;
-
-    } else if (fabs(ymax - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
-
+//      Этот блок одинаков для каждой ветки
         double d_ya = ymax - ymin;
         double d_xa = xmax - xmin;
         double d_za = zmax - zmin;
@@ -82,11 +76,56 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
         double d_xb = xmax - xmid;
         double d_zb = zmax - zmid;
         finish_x = xmid + d_xb * (y - ymid) / d_yb;
-        finish_z = xmid + d_zb * (y - ymid) / d_yb;
+        finish_z = zmid + d_zb * (y - ymid) / d_yb;
+
+//    } else if (fabs(ymax - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
+    } else if (y < ymid) {
+
+        std::cout << y << " lower" << std::endl;
+
+//      Этот блок одинаков для каждой ветки
+        double d_ya = ymax - ymin;
+        double d_xa = xmax - xmin;
+        double d_za = zmax - zmin;
+        start_x = xmin + d_xa * (y - ymin) / d_ya;
+        start_z = zmin + d_za * (y - ymin) / d_ya;
+
+//        double d_yb = ymax - ymid;
+//        double d_xb = xmax - xmid;
+//        double d_zb = zmax - zmid;
+//        finish_x = xmid + d_xb * (y - ymid) / d_yb;
+//        finish_z = xmid + d_zb * (y - ymid) / d_yb;
+        double d_yb = ymid - ymin;
+        double d_xb = xmid - xmin;
+        double d_zb = zmid - zmin;
+        finish_x = xmin + d_xb * (y - ymin) / d_yb;
+        finish_z = zmin + d_zb * (y - ymin) / d_yb;
 
     } else {
-        return;
+        std::cout << y << " equal" << std::endl;
+
+//      Этот блок одинаков для каждой ветки
+        double d_ya = ymax - ymin;
+        double d_xa = xmax - xmin;
+        double d_za = zmax - zmin;
+        start_x = xmin + d_xa * (y - ymin) / d_ya;
+        start_z = zmin + d_za * (y - ymin) / d_ya;
+
+        finish_x = xmid;
+        finish_z = zmid;
     }
+
+//// Определяем, где относительно среднего значения y мы находимся
+//// ситуацию, когда треугольник выраждается в точку или отрезок не расссматриваем
+//    if (y > ymid) {
+////        работаем с гранями ymid-ymax & ymin-ymax
+//
+//    } else if (y == ymid) {
+//
+//    } else {
+////        работаем с гранями ymid-ymin & ymin-ymax
+//
+//    }
 
     if (start_x > finish_x) {
         double tmp = start_x;
@@ -98,6 +137,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
     }
 
     if (fabs(finish_x - start_x) < 1e-2) {
+        std::cout << "y" << y << "pos 5" << std::endl;
         return;
     }
 
@@ -139,4 +179,3 @@ void z_buffer_render(screen_t *screen, std::vector<triangle_t*> triangles) {
     }
 
 }
-
