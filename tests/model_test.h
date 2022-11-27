@@ -9,6 +9,7 @@
 
 void test_rules();
 void test_params();
+void test_calculate_rule();
 
 void test_cube(screen_t *screen);
 void test_rotate_cube(screen_t *screen);

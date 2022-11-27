@@ -5,7 +5,6 @@
 #include "model_test.h"
 #include <iostream>
 #include <vector>
-#include "server_test.h"
 #include "../server/triangle_t.h"
 #include "../server/z_buffer.h"
 #include "../model/3d_objects/cube.h"
@@ -18,16 +17,24 @@
 #define PI 3.141592
 
 void test_rules() {
-    Rules rules({"a", "b", "c"}, {"a", "b", "c"});
+    Rules rules({'a', 'b', 'c'}, {"a", "b", "c"});
     rules.print();
 }
 
 void test_params() {
-    Rules rules({"a", "b", "c"}, {"a", "b", "c"});
+    Rules rules({'a', 'b', 'c'}, {"a", "b", "c"});
     rules.print();
 
     Params params(1, 2, 3, 30, 50, 5, "aaa", rules, 3);
     params.print();
+}
+
+void test_calculate_rule() {
+    Rules rules({'a', 'b', 'c'}, {"ab", "b", "cc"});
+    Params params(1, 2, 3, 30, 50, 5, "abc", rules, 2);
+
+    params.print();
+    std::cout << params.calculate();
 }
 
 void test_cube(screen_t *screen) {

@@ -18,6 +18,8 @@ public:
     Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, std::string _axiom, Rules &_rules, int _n);
     void print();
 
+    std::string calculate();  // рассчет итоговой формулы фрактала
+
     int n;
     int x;
     int y;
@@ -29,5 +31,6 @@ public:
     Rules rules;
 };
 
+//Params get_params_from_file(char *filename);
 
 #endif //C_VERSION_PARAMS_H

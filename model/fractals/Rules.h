@@ -15,11 +15,11 @@ class Rules
 {
 public:
     Rules(): data() {};
-    Rules(const std::vector<std::string> &from, const std::vector<std::string> &to);
+    Rules(const std::vector<char> &from, const std::vector<std::string> &to);
     void print();
 
     int size{};
-    std::map<std::string, std::string> data;
+    std::map<char, std::string> data;
 };
 
 

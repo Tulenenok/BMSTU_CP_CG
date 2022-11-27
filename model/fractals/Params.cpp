@@ -32,3 +32,28 @@ void Params::print() {
     this->rules.print();
 }
 
+std::string Params::calculate()
+{
+    std::string result_str = this->axiom;
+    for (int i = 0; i < n; ++i)
+    {
+        std::string tmp_str;
+        for (int j = 0; j < result_str.size(); ++j)
+        {
+            char sym = result_str[j];
+            if (rules.data.count(sym) == 1)
+                tmp_str += rules.data.at(sym);
+            else
+                tmp_str += sym;
+        }
+
+        result_str = tmp_str;
+    }
+    return result_str;
+}
+
+
+//Params get_params_from_file(char *filename)
+//{
+//    std::cout << "get";
+//}
