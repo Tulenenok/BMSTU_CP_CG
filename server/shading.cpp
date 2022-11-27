@@ -15,6 +15,8 @@ void linear_shading(triangle_t *triangle, std::vector<light_source_t*> &light_so
         triangle->processed_color.r = triangle->initial_color.r;
         triangle->processed_color.g = triangle->initial_color.g;
         triangle->processed_color.b = triangle->initial_color.b;
+
+        return;
     }
 
     double sum_k = 0.0;
@@ -69,3 +71,4 @@ void linear_shading(triangle_t *triangle, std::vector<light_source_t*> &light_so
     triangle->processed_color.g = g;
     triangle->processed_color.b = b;
 }
+

@@ -183,4 +183,5 @@ void z_buffer_render(screen_t *screen, std::vector<triangle_t*> triangles)
     for (int y = screen->height - 1; y >= 0; y--){
         complete_process_level(screen, triangles, y);
     }
+
 }
