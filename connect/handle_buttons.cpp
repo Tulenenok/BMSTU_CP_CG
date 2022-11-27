@@ -1,12 +1,53 @@
 #include <iostream>
 #include "handle_buttons.h"
+#include "../server/z_buffer.h"
+#include "../server/triangle_vector.h"
+#include "../model/3d_objects/cube.h"
 
-int load_figure()
+int Handler::load_figure(screen_t *screen_matrix)
 {
+    color_t color = {0, 0, 255};
+    add_cube(polygons, 300, 300, 0, 100, &color);
 
+    group_shading(polygons, light_sources);
+    z_buffer_render(screen_matrix, polygons);
+    return 0;
 }
 
-int add_light_source()
+int Handler::scale(screen_t *screen_matrix, double kx, double ky, double kz)
 {
+    vertex_t center;
+    group_center(polygons, center);
+    group_scale(polygons, center,  kx, ky , kz);
 
+    group_shading(polygons, light_sources);
+    z_buffer_render(screen_matrix, polygons);
+    return 0;
+}
+
+int Handler::rotate(screen_t *screen_matrix, double ax, double ay, double az) {
+    vertex_t center;
+    group_center(polygons, center);
+    group_rotate(polygons, center,  ax, ay , az);
+
+    group_shading(polygons, light_sources);
+    z_buffer_render(screen_matrix, polygons);
+    return 0;
+}
+
+int Handler::push(screen_t *screen_matrix, double dx, double dy, double dz) {
+    group_push(polygons, (int)dx, (int)dy , (int)dz);
+
+    group_shading(polygons, light_sources);
+    z_buffer_render(screen_matrix, polygons);
+    return 0;
+}
+
+int Handler::add_light_source(screen_t *screen_matrix, double x, double y, double z) {
+    auto new_ls = create_light_source_t(300, 300, -1000);
+    light_sources.push_back(new_ls);
+
+    group_shading(polygons, light_sources);
+    z_buffer_render(screen_matrix, polygons);
+    return 0;
 }

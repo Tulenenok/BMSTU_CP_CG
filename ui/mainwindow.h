@@ -9,10 +9,6 @@
 #include <QPushButton>
 
 #include "../connect/handle_buttons.h"
-#include "../server/screen_t.h"
-#include "../server/triangle_t.h"
-#include "../server/light_source.h"
-
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,19 +21,20 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    void fillScreen();
-
 private slots:
-    void on_LoadButton_clicked();
-    void on_DrawButton_clicked();
-    void on_AddLightButton_clicked();
+    void on_loadButton_clicked();
+    void on_cleanButton_clicked();
+    void on_pushButton_clicked();
+    void on_scaleButton_clicked();
+    void on_rotateButton_clicked();
+    void on_addLightButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    void fillScreen();
 
+    Ui::MainWindow *ui;
+    Handler handler;
     screen_t *screen_matrix;
-    std::vector<triangle_t*> polygons;
-    std::vector<light_source_t*> light_sources;
 };
 
 
