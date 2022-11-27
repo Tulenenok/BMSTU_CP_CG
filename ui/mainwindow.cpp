@@ -35,7 +35,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_loadButton_clicked() {
     handler.load_figure(screen_matrix);
-    fillScreen();
+    fillScene();
 
     std::cout << "Load success\n";
 }
@@ -55,7 +55,7 @@ void MainWindow::on_pushButton_clicked()
     double dz = ui->DzField->value();
 
     handler.push(screen_matrix, dx, dy, dz);
-    fillScreen();
+    fillScene();
 
     std::cout << "Push success\n";
 }
@@ -67,7 +67,7 @@ void MainWindow::on_scaleButton_clicked()
     double kz = ui->KzField->value();
 
     handler.scale(screen_matrix, kx, ky, kz);
-    fillScreen();
+    fillScene();
 
     std::cout << "Scale success\n";
 }
@@ -79,7 +79,7 @@ void MainWindow::on_rotateButton_clicked()
     double az = ui->AzField->value();
 
     handler.rotate(screen_matrix, ax, ay, az);
-    fillScreen();
+    fillScene();
 
     std::cout << "Rotate success\n";
 }
@@ -91,14 +91,14 @@ void MainWindow::on_addLightButton_clicked()
     double lz = ui->LzField->value();
 
     handler.add_light_source(screen_matrix, lx, ly, lz);
-    fillScreen();
+    fillScene();
 
     std::cout << "Add light success\n";
 }
 
-void MainWindow::fillScreen()
+void MainWindow::fillScene()
 {
-    ui->graphicsView->scene()->clear();
+//    ui->graphicsView->scene()->clear();
 
     int w = screen_matrix->width;
     int h = screen_matrix->height;

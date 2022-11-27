@@ -12,7 +12,7 @@
 int server_test_set_default_color(screen_t *screen)
 {
     color_t color = {150, 200, 90};
-    set_default_color(screen, &color);
+    fill_screen(screen, &color);
 
     return 0;
 }

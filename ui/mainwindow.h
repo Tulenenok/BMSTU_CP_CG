@@ -30,7 +30,7 @@ private slots:
     void on_addLightButton_clicked();
 
 private:
-    void fillScreen();
+    void fillScene();
 
     Ui::MainWindow *ui;
     Handler handler;

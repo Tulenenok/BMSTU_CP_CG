@@ -25,10 +25,12 @@ int Handler::scale(screen_t *screen_matrix, double kx, double ky, double kz)
     return 0;
 }
 
+#define PI 3.141592
+
 int Handler::rotate(screen_t *screen_matrix, double ax, double ay, double az) {
     vertex_t center;
     group_center(polygons, center);
-    group_rotate(polygons, center,  ax, ay , az);
+    group_rotate(polygons, center,  ax * PI / 180, ay * PI / 180 , az * PI / 180);
 
     group_shading(polygons, light_sources);
     z_buffer_render(screen_matrix, polygons);

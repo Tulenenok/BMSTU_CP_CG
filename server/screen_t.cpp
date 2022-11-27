@@ -19,6 +19,8 @@ screen_t *allocate_screen_t(screen_properties_t *screen) {
         matrix->change[i] = (bool *) calloc(screen->height, sizeof(bool));
     }
 
+    matrix->default_color = {255, 255, 255};
+
     set_whole_change_false(matrix);
 
     return matrix;
@@ -76,7 +78,7 @@ void set_whole_change_false(screen_t *matrix) {
     }
 }
 
-void set_default_color(screen_t *matrix, color_t *color) {
+void fill_screen(screen_t *matrix, color_t *color) {
     for (int x = 0; x < matrix->width; x++) {
         for (int y = 0; y < matrix->height; y++) {
             color_pixel(matrix, color, x, y);
@@ -84,3 +86,8 @@ void set_default_color(screen_t *matrix, color_t *color) {
     }
 }
 
+void set_default_color(screen_t *matrix, color_t *color) {
+    matrix->default_color.r = color->r;
+    matrix->default_color.g = color->g;
+    matrix->default_color.b = color->b;
+}
