@@ -11,12 +11,23 @@
 #include "../model/3d_objects/cube.h"
 #include "../server/triangle_vector.h"
 
+
+#include "../model/fractals/Rules.h"
+#include "../model/fractals/Params.h"
+
 #define PI 3.141592
 
-void test_params(screen_t *screen) {
-//    rules_t *rules = init_rules({"a", "b", "c"}, {"a", "b", "c"});
-//    print_rules(rules);
-//    free_rules(rules);
+void test_rules() {
+    Rules rules({"a", "b", "c"}, {"a", "b", "c"});
+    rules.print();
+}
+
+void test_params() {
+    Rules rules({"a", "b", "c"}, {"a", "b", "c"});
+    rules.print();
+
+    Params params(1, 2, 3, 30, 50, 5, "aaa", rules, 3);
+    params.print();
 }
 
 void test_cube(screen_t *screen) {

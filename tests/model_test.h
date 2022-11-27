@@ -7,7 +7,9 @@
 
 #include "../server/screen_t.h"
 
-void test_params(screen_t *screen);
+void test_rules();
+void test_params();
+
 void test_cube(screen_t *screen);
 void test_rotate_cube(screen_t *screen);
 void test_scale_cube(screen_t *screen);

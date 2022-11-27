@@ -14,8 +14,8 @@
 class Params
 {
 public:
-    Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, std::string _axiom, Rules _rules,
-           int _n, Rules rules);
+    Params() {};
+    Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, std::string _axiom, Rules &_rules, int _n);
     void print();
 
     int n;

@@ -14,10 +14,11 @@ typedef std::map<std::string, std::string> rules_t;
 class Rules
 {
 public:
+    Rules(): data() {};
     Rules(const std::vector<std::string> &from, const std::vector<std::string> &to);
     void print();
 
-    int size;
+    int size{};
     std::map<std::string, std::string> data;
 };
 

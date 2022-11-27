@@ -5,8 +5,8 @@
 #include <iostream>
 #include <utility>
 
-Params::Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, std::string _axiom,
-               Rules _rules, int _n, Rules rules) : rules(std::move(rules)) {
+Params::Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, std::string _axiom, Rules &_rules, int _n)
+{
     this->x = _x;
     this->y = _y;
     this->z = _z;
@@ -14,7 +14,7 @@ Params::Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, 
     this->delta = _delta;
     this->step = _step;
     this->axiom = std::move(_axiom);
-    this->rules = std::move(_rules);
+    this->rules = _rules;
     this->n = _n;
 }
 
