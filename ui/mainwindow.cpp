@@ -6,7 +6,7 @@
 #include "mainwindow.h"
 #include "ui_MainWindow.h"
 
-#include "../tests/server_test.h"
+#include "../tests/all_tests.h"
 
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -33,7 +33,8 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_LoadButton_clicked() {
-    server_test_set_default_color(screen_matrix);
+    test_push_cube(screen_matrix);
+//    server_test_set_default_color(screen_matrix);
     fillScreen();
 
     handleButton(LOAD);
@@ -47,6 +48,9 @@ void MainWindow::on_DrawButton_clicked() {
 }
 
 void MainWindow::on_AddLightButton_clicked() {
+    test_cube(screen_matrix);
+    fillScreen();
+
     handleButton(ADD_LIGHT);
 }
 

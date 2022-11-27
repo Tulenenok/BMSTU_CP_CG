@@ -67,6 +67,6 @@ void group_rotate(std::vector<triangle_t*> triangles, vertex_t center, double dx
     }
 }
 
-void group_add(std::vector<triangle_t*> triangles, triangle_t* triangle) {
+void group_add(std::vector<triangle_t*> &triangles, triangle_t* triangle) {
     triangles.push_back(triangle);
 }

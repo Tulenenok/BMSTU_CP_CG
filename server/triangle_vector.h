@@ -15,4 +15,6 @@ void group_push(std::vector<triangle_t*> triangles, int dx, int dy, int dz);
 void group_scale(std::vector<triangle_t*> triangles, vertex_t center, double dx, double dy, double dz);
 void group_rotate(std::vector<triangle_t*> triangles, vertex_t center, double dx, double dy, double dz);
 
+void group_add(std::vector<triangle_t*> &triangles, triangle_t* triangle);
+
 #endif //C_VERSION_TRIANGLE_VECTOR_H
