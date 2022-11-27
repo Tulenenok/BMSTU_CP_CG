@@ -6,6 +6,7 @@
 
 #include "triangle_vector.h"
 #include "triangle_t.h"
+#include "shading.h"
 
 void group_reset_processed_vertexes(std::vector<triangle_t*> triangles) {
     for (int i = 0; i < triangles.size(); i++) {
@@ -69,4 +70,10 @@ void group_rotate(std::vector<triangle_t*> triangles, vertex_t center, double dx
 
 void group_add(std::vector<triangle_t*> &triangles, triangle_t* triangle) {
     triangles.push_back(triangle);
+}
+
+void group_shading(std::vector<triangle_t*> &triangles, std::vector<light_source_t*> &light_sources) {
+    for (int i = 0; i < triangles.size(); i++) {
+        linear_shading(triangles[i], light_sources);
+    }
 }

@@ -5,12 +5,21 @@
 #ifndef C_VERSION_HANDLE_BUTTONS_H
 #define C_VERSION_HANDLE_BUTTONS_H
 
-enum cmd_t {
+typedef enum {
     LOAD,
     DRAW,
     ADD_LIGHT
-};
+} cmd_t;
 
-int handleButton(cmd_t command);
+class Handler
+{
+public:
+
+    int handle_button(cmd_t cmd);
+
+private:
+    int load_figure();
+    int add_light_source();
+};
 
 #endif //C_VERSION_HANDLE_BUTTONS_H

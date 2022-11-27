@@ -33,25 +33,30 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_LoadButton_clicked() {
-    test_push_cube(screen_matrix);
+//    test_rotate_cube(screen_matrix);
 //    server_test_set_default_color(screen_matrix);
+//    test_params(screen_matrix);
+    test_light(screen_matrix);
     fillScreen();
 
     handleButton(LOAD);
 }
 
 void MainWindow::on_DrawButton_clicked() {
-    server_test_draw_2_triangle(screen_matrix);
     fillScreen();
 
     handleButton(DRAW);
 }
 
-void MainWindow::on_AddLightButton_clicked() {
-    test_cube(screen_matrix);
-    fillScreen();
+void MainWindow::on_AddLightButton_clicked()
+{
+    auto new_ls = create_light_source_t(300, 300, -1000);
+    this->light_sources.push_back(new_ls);
 
-    handleButton(ADD_LIGHT);
+    group_shading(this->polygons, this->light_sources);
+    z_buffer_render(screen, cube);
+
+    handleButton(ADD_LIGHT, screen_matrix, polygons, light_sources, x, y, z);
 }
 
 void MainWindow::fillScreen()

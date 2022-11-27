@@ -10,6 +10,8 @@
 
 #include "../connect/handle_buttons.h"
 #include "../server/screen_t.h"
+#include "../server/triangle_t.h"
+#include "../server/light_source.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +26,6 @@ public:
     ~MainWindow() override;
 
     void fillScreen();
-    screen_t *screen_matrix;
 
 private slots:
     void on_LoadButton_clicked();
@@ -33,6 +34,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    screen_t *screen_matrix;
+    std::vector<triangle_t*> polygons;
+    std::vector<light_source_t*> light_sources;
 };
 
 
