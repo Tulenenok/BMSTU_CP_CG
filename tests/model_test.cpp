@@ -83,7 +83,7 @@ void test_fractal_paporotnik()
                 {R"([++++++++++++++EC]B^+B[--------------ED]B+BA)",
                      R"([---------EE][+++++++++EE]B__+C)",
                      "[---------EE][+++++++++EE]B__-D"});
-    Params params(0, 0, 0, 90, 4, 5, "EEEA", rules, 2);
+    Params params(0, 0, 0, 90, 4, 10, "EEEA", rules, 12);
     Fractal fractal;
     fractal.setParams(params);
     params.print();
@@ -91,6 +91,24 @@ void test_fractal_paporotnik()
     std::cout << "\n" << params.calculate();
     fractal.calculate();
     fractal.print_links();
+}
+
+Fractal test_fractal_show()
+{
+    Rules rules({'A', 'C', 'D'},
+                {R"([++++++++++++++EC]B^+B[--------------ED]B+BA)",
+                 R"([---------EE][+++++++++EE]B__+C)",
+                 "[---------EE][+++++++++EE]B__-D"});
+    Params params(0, 0, 0, 90, 4, 10, "EEEA", rules, 12);
+    Fractal fractal;
+    fractal.setParams(params);
+    params.print();
+
+    std::cout << "\n" << params.calculate();
+    fractal.calculate();
+    fractal.print_links();
+
+    return fractal;
 }
 
 void test_cube(screen_t *screen) {
