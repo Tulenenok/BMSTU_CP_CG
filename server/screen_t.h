@@ -18,11 +18,16 @@ typedef struct {
 
 screen_t *allocate_screen_t(screen_properties_t *screen);
 void free_screen_t(screen_t *matrix);
+
 void color_pixel(screen_t *matrix, color_t *color, int x, int y);
 void color_pixel(screen_t *matrix, int r, int g, int b, int x, int y);
+
 void set_whole_change_true(screen_t *matrix);
 void set_whole_change_false(screen_t *matrix);
+
 void fill_screen(screen_t *matrix, color_t *color);
 void set_default_color(screen_t *matrix, color_t *color);
+
+void reset_screen(screen_t *matrix);
 
 #endif //C_VERSION_SCREEN_T_H

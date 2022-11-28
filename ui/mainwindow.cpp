@@ -7,6 +7,7 @@
 #include "ui_MainWindow.h"
 
 #include "../tests/all_tests.h"
+#include "../server/triangle_vector.h"
 
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -26,6 +27,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     screen_properties_t screenProperties {ui->graphicsView->width(), ui->graphicsView->height()};
     screen_matrix = allocate_screen_t(&screenProperties);
+
+    change_factor = allocate_change_factor_t();
+
+    color_t color = {255, 255, 255};
+    set_default_color(screen_matrix, &color);
+    reset_screen(screen_matrix);
+
+    fillScene();
 }
 
 MainWindow::~MainWindow() {
@@ -33,8 +42,14 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_loadButton_clicked() {
+void MainWindow::on_loadButton_clicked()
+{
+    reset_screen(screen_matrix);
+
     handler.load_figure(screen_matrix);
+    complex_change();
+    handler.render(screen_matrix);
+
     fillScene();
 
 //    Fractal fr = test_fractal_show();
@@ -44,21 +59,25 @@ void MainWindow::on_loadButton_clicked() {
     std::cout << "Load success\n";
 }
 
-void MainWindow::on_cleanButton_clicked(){
-    ui->graphicsView->scene()->clear();
-
-    free_screen_t(screen_matrix);
-    screen_properties_t screenProperties {ui->graphicsView->width(), ui->graphicsView->height()};
-    screen_matrix = allocate_screen_t(&screenProperties);
+void MainWindow::on_cleanButton_clicked()
+{
+    reset_screen(screen_matrix);
+    handler.polygons.clear();
+    handler.light_sources.clear();
+    reset_change_factor_t(change_factor);
+    fillScene();
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    double dx = ui->DxField->value();
-    double dy = ui->DyField->value();
-    double dz = ui->DzField->value();
+    reset_screen(screen_matrix);
+    increment_push_factor(change_factor,
+                          ui->DxField->value(),
+                          ui->DyField->value(),
+                          ui->DzField->value());
 
-    handler.push(screen_matrix, dx, dy, dz);
+    complex_change();
+    handler.render(screen_matrix);
     fillScene();
 
     std::cout << "Push success\n";
@@ -66,11 +85,14 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_scaleButton_clicked()
 {
-    double kx = ui->KxField->value();
-    double ky = ui->KyField->value();
-    double kz = ui->KzField->value();
+    reset_screen(screen_matrix);
+    increment_scale_factor(change_factor,
+                          ui->KxField->value(),
+                          ui->KyField->value(),
+                          ui->KzField->value());
 
-    handler.scale(screen_matrix, kx, ky, kz);
+    complex_change();
+    handler.render(screen_matrix);
     fillScene();
 
     std::cout << "Scale success\n";
@@ -78,11 +100,14 @@ void MainWindow::on_scaleButton_clicked()
 
 void MainWindow::on_rotateButton_clicked()
 {
-    double ax = ui->AxField->value();
-    double ay = ui->AyField->value();
-    double az = ui->AzField->value();
+    reset_screen(screen_matrix);
+    increment_rotate_factor(change_factor,
+                           ui->AxField->value(),
+                           ui->AyField->value(),
+                           ui->AzField->value());
 
-    handler.rotate(screen_matrix, ax, ay, az);
+    complex_change();
+    handler.render(screen_matrix);
     fillScene();
 
     std::cout << "Rotate success\n";
@@ -127,4 +152,24 @@ void MainWindow::drawLine(vertex_t p1, vertex_t p2)
     int h = ui->graphicsView->height();
 
    scene->addLine(p1[0] + w / 2, -p1[1] + h / 5 * 4, p2[0] + w / 2, -p2[1] + h / 5 * 4);
+}
+
+void MainWindow::complex_change()
+{
+    group_reset_processed_vertexes(handler.polygons);
+
+    handler.push(screen_matrix,
+                 change_factor->push_factor[0],
+                 change_factor->push_factor[1],
+                 change_factor->push_factor[2]);
+
+    handler.scale(screen_matrix,
+                  change_factor->scale_factor[0],
+                  change_factor->scale_factor[1],
+                  change_factor->scale_factor[2]);
+
+    handler.rotate(screen_matrix,
+                   change_factor->rotate_factor[0],
+                   change_factor->rotate_factor[1],
+                   change_factor->rotate_factor[2]);
 }

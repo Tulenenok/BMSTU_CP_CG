@@ -10,6 +10,8 @@
 #include <QGraphicsScene>
 
 #include "../connect/handle_buttons.h"
+#include "../server/change_factor_t.h"
+#include "../server/change_factor_t.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,6 +41,9 @@ private:
     Handler handler;
     screen_t *screen_matrix;
     QGraphicsScene *scene;
+    change_factor_t *change_factor;
+
+    void complex_change();
 };
 
 

@@ -91,3 +91,7 @@ void set_default_color(screen_t *matrix, color_t *color) {
     matrix->default_color.g = color->g;
     matrix->default_color.b = color->b;
 }
+
+void reset_screen(screen_t *matrix) {
+    fill_screen(matrix, &matrix->default_color);
+}

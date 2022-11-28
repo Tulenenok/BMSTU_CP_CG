@@ -29,13 +29,13 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
 
 //  Если треугольник целиком выше или ниже уровня
     if (y < triangle->processed_vertexes[min_y_ind][1] || y > triangle->processed_vertexes[max_y_ind][1]) {
-        std::cout << "y" << y << "pos 1" << std::endl;
+//        std::cout << "y" << y << "pos 1" << std::endl;
         return;
     }
 
 //   Если треугольник выраждается в точку или линию - пропускаем этот треугольник
     if (max_x_ind == min_x_ind || max_y_ind == min_y_ind) {
-        std::cout << "y" << y << "pos 2" << std::endl;
+//        std::cout << "y" << y << "pos 2" << std::endl;
         return;
     }
 
@@ -51,7 +51,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
             }
         }
 
-        std::cout << "y" << y << "pos 3" << std::endl;
+//        std::cout << "y" << y << "pos 3" << std::endl;
         return;
     }
 
@@ -63,7 +63,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
 //    if (y > ymid && fabs(ymin - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
     if (y > ymid) {
 
-        std::cout << y << " higher" << std::endl;
+//        std::cout << y << " higher" << std::endl;
 
 //      Этот блок одинаков для каждой ветки
         double d_ya = ymax - ymin;
@@ -81,7 +81,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
 //    } else if (fabs(ymax - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
     } else if (y < ymid) {
 
-        std::cout << y << " lower" << std::endl;
+//        std::cout << y << " lower" << std::endl;
 
 //      Этот блок одинаков для каждой ветки
         double d_ya = ymax - ymin;
@@ -102,7 +102,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
         finish_z = zmin + d_zb * (y - ymin) / d_yb;
 
     } else {
-        std::cout << y << " equal" << std::endl;
+//        std::cout << y << " equal" << std::endl;
 
 //      Этот блок одинаков для каждой ветки
         double d_ya = ymax - ymin;
@@ -137,7 +137,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
     }
 
     if (fabs(finish_x - start_x) < 1e-2) {
-        std::cout << "y" << y << "pos 5" << std::endl;
+//        std::cout << "y" << y << "pos 5" << std::endl;
         return;
     }
 

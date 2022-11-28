@@ -31,16 +31,16 @@ void group_center(std::vector<triangle_t*> triangles, vertex_t center) {
         }
     } else {
         for (int i = 0; i < 3; i++) {
-            mins[i] = triangles[0]->initial_vertexes[0][i];
-            maxs[i] = triangles[0]->initial_vertexes[0][i];
+            mins[i] = triangles[0]->processed_vertexes[0][i];
+            maxs[i] = triangles[0]->processed_vertexes[0][i];
         }
     }
 
     for (int i = 0; i < triangles.size(); i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
-                mins[k] = mins[k] > triangles[i]->initial_vertexes[j][k] ? triangles[i]->initial_vertexes[j][k] : mins[k];
-                maxs[k] = maxs[k] < triangles[i]->initial_vertexes[j][k] ? triangles[i]->initial_vertexes[j][k] : maxs[k];
+                mins[k] = mins[k] > triangles[i]->processed_vertexes[j][k] ? triangles[i]->processed_vertexes[j][k] : mins[k];
+                maxs[k] = maxs[k] < triangles[i]->processed_vertexes[j][k] ? triangles[i]->processed_vertexes[j][k] : maxs[k];
             }
         }
     }
