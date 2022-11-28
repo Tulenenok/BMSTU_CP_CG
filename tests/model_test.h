@@ -11,7 +11,9 @@ void test_rules();
 void test_params();
 void test_calculate_rule();
 void test_params_copy();
-void test_fractal();
+void test_simple_fractal();
+void test_fractal_tree();
+void test_fractal_paporotnik();
 
 void test_cube(screen_t *screen);
 void test_rotate_cube(screen_t *screen);

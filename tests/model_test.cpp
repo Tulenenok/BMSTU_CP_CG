@@ -46,13 +46,12 @@ void test_params_copy()
 
     std::vector<Params> v1;
     v1.push_back(params);
-    params.rules = rule2;
-    params.rules.print();
+    params.HLU[0][0] = 10;
 
-    v1[0].rules.print();
+    std::cout << v1[0].HLU[0][0];
 }
 
-void test_fractal()
+void test_simple_fractal()
 {
     Rules rules({'A'}, {"AB"});
     Params params(0, 0, 0, 90, 0, 5, "ABC", rules, 0);
@@ -63,7 +62,35 @@ void test_fractal()
     std::cout << "\n" << params.calculate();
     fractal.calculate();
     fractal.print_links();
-//    fractal.getParams().print();
+}
+
+void test_fractal_tree()
+{
+    Rules rules({'A', 'B'}, {R"(B[+A]||||[+A]||||[+A]||||BA)", "BB"});
+    Params params(0, 0, 0, 90, 30, 5, "A", rules, 2);
+    Fractal fractal;
+    fractal.setParams(params);
+    params.print();
+
+    std::cout << "\n" << params.calculate();
+    fractal.calculate();
+    fractal.print_links();
+}
+
+void test_fractal_paporotnik()
+{
+    Rules rules({'A', 'C', 'D'},
+                {R"([++++++++++++++EC]B^+B[--------------ED]B+BA)",
+                     R"([---------EE][+++++++++EE]B__+C)",
+                     "[---------EE][+++++++++EE]B__-D"});
+    Params params(0, 0, 0, 90, 4, 5, "EEEA", rules, 2);
+    Fractal fractal;
+    fractal.setParams(params);
+    params.print();
+
+    std::cout << "\n" << params.calculate();
+    fractal.calculate();
+    fractal.print_links();
 }
 
 void test_cube(screen_t *screen) {

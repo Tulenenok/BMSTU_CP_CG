@@ -53,6 +53,17 @@ std::string Params::calculate()
     return result_str;
 }
 
+void Params::print_hlu()
+{
+    std::cout << "HLU\n";
+    for(auto v : HLU)
+    {
+        for (auto p: v)
+            std::cout << p << " ";
+        std::cout << "\n";
+    }
+}
+
 
 //Params get_params_from_file(char *filename)
 //{

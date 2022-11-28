@@ -15,6 +15,6 @@
 
 int main(int argc, char *argv[])
 {
-    test_fractal();
+    test_fractal_paporotnik();
 }
 

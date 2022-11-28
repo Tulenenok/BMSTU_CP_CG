@@ -18,6 +18,8 @@ Params Fractal::getParams()
 
 void Fractal::calculate()
 {
+    // В этой функции изменены "стандартные" расшифровки ключей (например, \ это |)
+
     std::string formula = this->params.calculate();         //  Посчитали итоговую формулу фрактала
 
     Params tmp = params;
@@ -61,7 +63,7 @@ void Fractal::calculate()
         else if (r == '/')
             rotate_matrix(-tmp.delta, 'H', &tmp.HLU);
         else if (r == '\\')
-            rotate_matrix(180, 'U', &tmp.HLU);
+            rotate_matrix(180, 'U', &tmp.HLU);              //TODO
 
         else if (r == '[')
             stack.push_back(tmp);
