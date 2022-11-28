@@ -11,3 +11,10 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
+//#include "tests/all_tests.h"
+//
+//int main(int argc, char *argv[])
+//{
+//    test_fractal_show();
+//}
+

@@ -5,7 +5,7 @@
 #include "Rules.h"
 #include <iostream>
 
-Rules::Rules(const std::vector<std::string> &from, const std::vector<std::string> &to)
+Rules::Rules(const std::vector<char> &from, const std::vector<std::string> &to)
 {
     this->size = (int)from.size();
 

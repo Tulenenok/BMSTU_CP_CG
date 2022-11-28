@@ -12,7 +12,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    QGraphicsScene *scene = new QGraphicsScene(this);
+    scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     scene->setSceneRect(0, 0, 1, 1);
@@ -36,6 +36,10 @@ MainWindow::~MainWindow() {
 void MainWindow::on_loadButton_clicked() {
     handler.load_figure(screen_matrix);
     fillScene();
+
+//    Fractal fr = test_fractal_show();
+//    for(auto l: fr.links)
+//        drawLine(l.from, l.to);
 
     std::cout << "Load success\n";
 }
@@ -115,4 +119,12 @@ void MainWindow::fillScene()
             }
 
     ui->graphicsView->scene()->addPixmap(QPixmap::fromImage(image));
+}
+
+void MainWindow::drawLine(vertex_t p1, vertex_t p2)
+{
+    int w = ui->graphicsView->width();
+    int h = ui->graphicsView->height();
+
+   scene->addLine(p1[0] + w / 2, -p1[1] + h / 5 * 4, p2[0] + w / 2, -p2[1] + h / 5 * 4);
 }

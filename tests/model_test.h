@@ -6,8 +6,17 @@
 #define C_VERSION_MODEL_TEST_H
 
 #include "../server/screen_t.h"
+#include "../model/fractals/Fractal.h"
 
-void test_params(screen_t *screen);
+void test_rules();
+void test_params();
+void test_calculate_rule();
+void test_params_copy();
+void test_simple_fractal();
+void test_fractal_tree();
+void test_fractal_paporotnik();
+Fractal test_fractal_show();
+
 void test_cube(screen_t *screen);
 void test_rotate_cube(screen_t *screen);
 void test_scale_cube(screen_t *screen);

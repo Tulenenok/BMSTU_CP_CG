@@ -7,6 +7,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QGraphicsScene>
 
 #include "../connect/handle_buttons.h"
 
@@ -20,6 +21,8 @@ Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
+
+    void drawLine(vertex_t p1, vertex_t p2);
 
 private slots:
     void on_loadButton_clicked();
@@ -35,6 +38,7 @@ private:
     Ui::MainWindow *ui;
     Handler handler;
     screen_t *screen_matrix;
+    QGraphicsScene *scene;
 };
 
 

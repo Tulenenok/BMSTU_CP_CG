@@ -7,4 +7,6 @@
 
 typedef int vertex_t[3];
 
+void copy_vertex(const vertex_t src, vertex_t dst);
+
 #endif //C_VERSION_VERTEX_T_H
