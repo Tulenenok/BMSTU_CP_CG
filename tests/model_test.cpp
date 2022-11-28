@@ -95,6 +95,23 @@ void test_fractal_paporotnik()
 
 Fractal test_fractal_show()
 {
+    Rules rules({'A', 'B'}, {R"(B[+A]||||[+A]||||[+A]||||BA)", "BB"});
+    Params params(0, 0, 0, 90, 30, 15, "A", rules, 4);
+
+    Fractal fractal;
+    fractal.setParams(params);
+    params.print();
+
+    std::cout << "\n" << params.calculate();
+    fractal.calculate();
+    fractal.print_links();
+
+    return fractal;
+}
+
+Fractal test_fractal_show_2()
+{
+    // Папоротник
     Rules rules({'A', 'C', 'D'},
                 {R"([++++++++++++++EC]B^+B[--------------ED]B+BA)",
                  R"([---------EE][+++++++++EE]B__+C)",
