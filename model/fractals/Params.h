@@ -10,6 +10,9 @@
 #include <string>
 
 #include "Rules.h"
+#include "../../server/vertex_t.h"
+
+typedef std::vector<std::vector<double>> mat_t;
 
 class Params
 {
@@ -21,14 +24,16 @@ public:
     std::string calculate();  // рассчет итоговой формулы фрактала
 
     int n;
-    int x;
-    int y;
-    int z;
+    vertex_t p;
     float alpha;
     float delta;
     float step;
     std::string axiom;
     Rules rules;
+
+    std::vector<char> consts;
+
+    mat_t HLU = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 };
 
 //Params get_params_from_file(char *filename);

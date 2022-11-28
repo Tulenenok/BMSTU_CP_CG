@@ -7,9 +7,10 @@
 
 Params::Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, std::string _axiom, Rules &_rules, int _n)
 {
-    this->x = _x;
-    this->y = _y;
-    this->z = _z;
+    this->p[0] = _x;
+    this->p[1] = _y;
+    this->p[2] = _z;
+
     this->alpha = _alpha;
     this->delta = _delta;
     this->step = _step;
@@ -21,9 +22,10 @@ Params::Params(int _x, int _y, int _z, float _alpha, float _delta, float _step, 
 void Params::print() {
     std::cout << "\n";
     std::cout << "N = " << this->n << "\n";
-    std::cout << "X = " << this->x << "\n";
-    std::cout << "Y = " << this->y << "\n";
-    std::cout << "Z = " << this->z << "\n";
+    std::cout << "X = " << this->p[0] << "\n";
+    std::cout << "Y = " << this->p[1] << "\n";
+    std::cout << "Z = " << this->p[2] << "\n";
+    std::cout << "Step = " << this->step << "\n";
 
     std::cout << "Alpha = " << this->alpha << "\n";
     std::cout << "Delta = " << this->delta << "\n";
@@ -38,9 +40,8 @@ std::string Params::calculate()
     for (int i = 0; i < n; ++i)
     {
         std::string tmp_str;
-        for (int j = 0; j < result_str.size(); ++j)
+        for (char sym : result_str)
         {
-            char sym = result_str[j];
             if (rules.data.count(sym) == 1)
                 tmp_str += rules.data.at(sym);
             else

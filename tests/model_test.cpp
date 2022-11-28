@@ -13,6 +13,7 @@
 
 #include "../model/fractals/Rules.h"
 #include "../model/fractals/Params.h"
+#include "../model/fractals/Fractal.h"
 
 #define PI 3.141592
 
@@ -35,6 +36,34 @@ void test_calculate_rule() {
 
     params.print();
     std::cout << params.calculate();
+}
+
+void test_params_copy()
+{
+    Rules rules({'a', 'b', 'c'}, {"ab", "b", "cc"});
+    Rules rule2({'a'}, {"ab"});
+    Params params(1, 2, 3, 30, 50, 5, "abc", rules, 2);
+
+    std::vector<Params> v1;
+    v1.push_back(params);
+    params.rules = rule2;
+    params.rules.print();
+
+    v1[0].rules.print();
+}
+
+void test_fractal()
+{
+    Rules rules({'A'}, {"AB"});
+    Params params(0, 0, 0, 90, 0, 5, "ABC", rules, 0);
+    Fractal fractal;
+    fractal.setParams(params);
+    params.print();
+
+    std::cout << "\n" << params.calculate();
+    fractal.calculate();
+    fractal.print_links();
+//    fractal.getParams().print();
 }
 
 void test_cube(screen_t *screen) {

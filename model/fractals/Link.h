@@ -11,6 +11,10 @@
 class Link
 {
 public:
+    Link() {};
+    Link(vertex_t f, vertex_t t);
+    void print();
+
     vertex_t from;
     vertex_t to;
 };
