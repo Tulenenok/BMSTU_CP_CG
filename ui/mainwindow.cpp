@@ -34,12 +34,12 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_loadButton_clicked() {
-//    handler.load_figure(screen_matrix);
-//    fillScene();
+    handler.load_figure(screen_matrix);
+    fillScene();
 
-    Fractal fr = test_fractal_show();
-    for(auto l: fr.links)
-        drawLine(l.from, l.to);
+//    Fractal fr = test_fractal_show();
+//    for(auto l: fr.links)
+//        drawLine(l.from, l.to);
 
     std::cout << "Load success\n";
 }
