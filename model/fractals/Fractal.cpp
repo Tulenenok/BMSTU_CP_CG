@@ -134,10 +134,11 @@ void Fractal::print_links()
 
 void Fractal::generate_cubes(std::vector<triangle_t *> &polygons)
 {
+    bool show_from_point = true;
     for (auto link: links)
     {
         double L = link.get_len();
-        color_t color = {0, 0, 255};
+        color_t color = {230,168,215};
 
         //  Общие приращения по всем координатам
         int d_X = link.from[0] - link.to[0];
@@ -155,17 +156,20 @@ void Fractal::generate_cubes(std::vector<triangle_t *> &polygons)
             a = ceil(k * L / (default_n - 1));
 
         // Если максимальное приращение по оси X
-            // Рассчитываем координаты центров кубов
+        // Рассчитываем координаты центров кубов
         int c_x = link.from[0];
         int c_y = link.from[1];
         int c_z = link.from[2];
 
         for (int i = 0; i < default_n; i++)
-        {
-            add_cube(polygons, c_x, c_y, c_z, a, &color);
-            c_x += round(k * d_X);
-            c_y += round(k * d_Y);
-            c_z += round(k * d_Z);
-        }
+            if (i != 0 or i == 0 and show_from_point)
+            {
+                add_cube(polygons, c_x, c_y, c_z, a, &color);
+                c_x += round(k * d_X);
+                c_y += round(k * d_Y);
+                c_z += round(k * d_Z);
+            }
+
+        show_from_point = false;
     }
 }

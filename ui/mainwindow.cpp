@@ -132,5 +132,7 @@ void MainWindow::drawLine(vertex_t p1, vertex_t p2)
     int w = ui->graphicsView->width();
     int h = ui->graphicsView->height();
 
-   scene->addLine(p1[0] + w / 2, -p1[1] + h / 5 * 4, p2[0] + w / 2, -p2[1] + h / 5 * 4);
+    scene->addLine(p1[0], p1[1], p2[0], p2[1]);
+
+//   scene->addLine(p1[0] + w / 2, -p1[1] + h / 5 * 4, p2[0] + w / 2, -p2[1] + h / 5 * 4);
 }
