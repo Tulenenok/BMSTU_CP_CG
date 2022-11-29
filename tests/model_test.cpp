@@ -32,7 +32,7 @@ void test_params() {
 
 void test_calculate_rule() {
     Rules rules({'a', 'b', 'c'}, {"ab", "b", "cc"});
-    Params params(1, 2, 3, 30, 50, 5, "abc", rules, 2);
+    Params params(1, 2, 3, 30, 50, 5, "abc", rules, 3);
 
     params.print();
     std::cout << params.calculate();
@@ -96,7 +96,7 @@ void test_fractal_paporotnik()
 Fractal test_fractal_show()
 {
     Rules rules({'A', 'B'}, {R"(B[+A]||||[+A]||||[+A]||||BA)", "BB"});
-    Params params(300, 300, 0, 90, 30, 15, "A", rules, 1);
+    Params params(300, 300, 0, -90, 30, 15, "A", rules, 4);
 
     Fractal fractal;
     fractal.setParams(params);

@@ -8,8 +8,8 @@
 
 int Handler::load_figure(screen_t *screen_matrix)
 {
-    color_t color = {0, 0, 255};
-    add_cube(polygons, 300, 300, 0, 30, &color);
+//    color_t color = {0, 0, 255};
+//    add_cube(polygons, 300, 300, 0, 30, &color);
 
     std::cout << polygons.size();
     group_shading(polygons, light_sources);
