@@ -34,10 +34,16 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_loadButton_clicked() {
+    Fractal fr = test_fractal_show();
+    std::vector<triangle_t*> pol;
+    fr.generate_cubes(pol);
+
+    handler.push_polygons(pol);
+    std::cout << fr.links.size() << "\n\n";
+
     handler.load_figure(screen_matrix);
     fillScene();
 
-//    Fractal fr = test_fractal_show();
 //    for(auto l: fr.links)
 //        drawLine(l.from, l.to);
 

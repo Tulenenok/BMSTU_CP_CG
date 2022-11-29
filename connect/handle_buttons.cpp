@@ -11,9 +11,11 @@ int Handler::load_figure(screen_t *screen_matrix)
     color_t color = {0, 0, 255};
     add_cube(polygons, 300, 300, 0, 30, &color);
 
+    std::cout << polygons.size();
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
     z_buffer_render(screen_matrix, polygons);
+
     return 0;
 }
 
@@ -59,4 +61,9 @@ int Handler::add_light_source(screen_t *screen_matrix, double x, double y, doubl
     fill_screen(screen_matrix, &screen_matrix->default_color);
     z_buffer_render(screen_matrix, polygons);
     return 0;
+}
+
+void Handler::push_polygons(std::vector<triangle_t *> pp)
+{
+    polygons.insert( polygons.end(), pp.begin(), pp.end() );
 }

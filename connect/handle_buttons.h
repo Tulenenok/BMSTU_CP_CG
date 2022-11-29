@@ -25,6 +25,8 @@ public:
 
     int add_light_source(screen_t *screen_matrix, double x, double y, double z);
 
+    void push_polygons(std::vector<triangle_t*>);
+
 private:
     std::vector<triangle_t*> polygons;
     std::vector<light_source_t*> light_sources;

@@ -21,6 +21,9 @@ public:
     void print_links();
 
     std::vector<Link> links;
+    void generate_cubes(std::vector<triangle_t *> &polygons);
+
+    int default_a{3};
 
 private:
     Params params;

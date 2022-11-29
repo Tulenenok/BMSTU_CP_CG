@@ -131,3 +131,29 @@ void Fractal::print_links()
     for(auto l: links)
         l.print();
 }
+
+void Fractal::generate_cubes(std::vector<triangle_t *> &polygons)
+{
+    for (auto l: links)
+    {
+        double len_vertex = l.get_len();
+        int count_cubes = ceil(len_vertex / default_a);
+        color_t color = {0, 0, 255};
+
+        int d_x = l.from[0] - l.to[0];
+        int d_y = l.from[1] - l.to[1];
+        int d_z = l.from[2] - l.to[2];
+
+        int c_x = l.from[0];
+        int c_y = l.from[1];
+        int c_z = l.from[2];
+
+        for (int i = 0; i < count_cubes; i++)
+        {
+            c_x += floor(default_a / len_vertex * d_x);
+            c_y += floor(default_a / len_vertex * d_y);
+            c_z += floor(default_a / len_vertex * d_z);
+            add_cube(polygons, c_x, c_y, c_z, default_a, &color);
+        }
+    }
+}
