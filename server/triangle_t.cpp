@@ -74,7 +74,7 @@ int count_value_with_axis(triangle_t *triangle, int axis, int value) {
     int count = 0;
 
     for (int i = 0; i < 3; i++) {
-        if (triangle->processed_vertexes[i][axis] == value) {
+        if (fabs(triangle->processed_vertexes[i][axis] - value) < 1e-6) {
             count++;
         }
     }
@@ -86,14 +86,14 @@ int count_value_with_axis(triangle_t *triangle, int axis, int value) {
 //Речь идет об уже преобразованных вершинах
 int index_with_axis(triangle_t *triangle, int axis, int value) {
     for (int i = 0; i < 3; i++) {
-        if (triangle->processed_vertexes[i][axis] == value) {
+        if (fabs(triangle->processed_vertexes[i][axis] - value) < 1e-6) {
             return i;
         }
     }
     return 0;
 }
 
-void set_vertex_by_index(triangle_t *triangle, int ind, int x, int y, int z) {
+void set_vertex_by_index(triangle_t *triangle, int ind, double x, double y, double z) {
     triangle->initial_vertexes[ind][0] = x;
     triangle->initial_vertexes[ind][1] = y;
     triangle->initial_vertexes[ind][2] = z;
@@ -113,13 +113,13 @@ void set_color(triangle_t *triangle, color_t *color) {
     triangle->processed_color.b = color->b;
 }
 
-void set_perpendicular(triangle_t *triangle, int x, int y, int z) {
+void set_perpendicular(triangle_t *triangle, double x, double y, double z) {
     triangle->perpendicular[0] = x;
     triangle->perpendicular[1] = y;
     triangle->perpendicular[2] = z;
 }
 
-void predict_perpendicular(triangle_t *triangle) {
+void predict_normal(triangle_t *triangle) {
     double ax = triangle->initial_vertexes[0][0];
     double ay = triangle->initial_vertexes[0][1];
     double az = triangle->initial_vertexes[0][2];
@@ -140,9 +140,17 @@ void predict_perpendicular(triangle_t *triangle) {
     double y_ac = cy - ay;
     double z_ac = cz - az;
 
-    int x_n = (int) (y_ab * z_ac - y_ac * z_ab);
-    int y_n = (int) (x_ab * z_ac - x_ac * z_ab);
-    int z_n = (int) (x_ab * y_ac - x_ac * y_ab);
+    double x_n = (y_ab * z_ac - y_ac * z_ab);
+    double y_n = (x_ab * z_ac - x_ac * z_ab);
+    double z_n = (x_ab * y_ac - x_ac * y_ab);
+
+    double length = sqrt(x_n * x_n + y_n * y_n + z_n * z_n);
+
+    if (length > 1e-6) {
+        x_n /= length;
+        y_n /= length;
+        z_n /= length;
+    }
 
     triangle->perpendicular[0] = x_n;
     triangle->perpendicular[1] = y_n;
@@ -150,9 +158,9 @@ void predict_perpendicular(triangle_t *triangle) {
 }
 
 void calculate_center(triangle_t *triangle) {
-    int x = 0;
-    int y = 0;
-    int z = 0;
+    double x = 0;
+    double y = 0;
+    double z = 0;
 
     for (int i = 0; i < 3; i++) {
         x += triangle->initial_vertexes[i][0];
@@ -183,7 +191,7 @@ void reset_processed_color(triangle_t *triangle) {
     triangle->processed_color.b = triangle->initial_color.b;
 }
 
-void push(triangle_t *triangle, int dx, int dy, int dz) {
+void push(triangle_t *triangle, double dx, double dy, double dz) {
     for (int i = 0; i < 3; i++) {
         triangle->processed_vertexes[i][0] += dx;
         triangle->processed_vertexes[i][1] += dy;
@@ -191,19 +199,19 @@ void push(triangle_t *triangle, int dx, int dy, int dz) {
     }
 }
 
-void scale(triangle_t *triangle, vertex_t center, double dx, double dy, double dz) {
+void scale(triangle_t *triangle, double center[3], double dx, double dy, double dz) {
     push(triangle, -center[0], -center[1], -center[2]);
 
     for (int i = 0; i < 3; i++) {
-        triangle->processed_vertexes[i][0] = (int) (triangle->processed_vertexes[i][0] * dx);
-        triangle->processed_vertexes[i][1] = (int) (triangle->processed_vertexes[i][1] * dy);
-        triangle->processed_vertexes[i][2] = (int) (triangle->processed_vertexes[i][2] * dz);
+        triangle->processed_vertexes[i][0] = (triangle->processed_vertexes[i][0] * dx);
+        triangle->processed_vertexes[i][1] = (triangle->processed_vertexes[i][1] * dy);
+        triangle->processed_vertexes[i][2] = (triangle->processed_vertexes[i][2] * dz);
     }
 
     push(triangle, center[0], center[1], center[2]);
 }
 
-void rotate(triangle_t *triangle, vertex_t center, double dx, double dy, double dz) {
+void rotate(triangle_t *triangle, double center[3], double dx, double dy, double dz) {
     push(triangle, -center[0], -center[1], -center[2]);
 
 
@@ -212,9 +220,7 @@ void rotate(triangle_t *triangle, vertex_t center, double dx, double dy, double 
         x = triangle->processed_vertexes[i][0];
         y = triangle->processed_vertexes[i][1];
         z = triangle->processed_vertexes[i][2];
-//        triangle->processed_vertexes[i][0] = (int) ((cos(dx) * cos(dz) - sin(dx) * cos(dy) * sin(dz)) * x - (sin(dx) * cos(dz) + cos(dx) * cos(dy) * sin(dz)) * y + sin(dy) * sin(dz) * z);
-//        triangle->processed_vertexes[i][1] = (int) ((cos(dx) * sin(dz) + sin(dx) * cos(dy) * cos(dz)) * x - (sin(dx) * sin(dz) - cos(dx) * cos(dy) * cos(dz)) * y - sin(dy) * cos(dz) * z);
-//        triangle->processed_vertexes[i][2] = (int) (sin(dx) * sin(dy) * x + cos(dx) * sin(dy) * y + cos(dy) * z);
+
         nx = x;
         ny = y * cos(dx) + z * sin(dx);
         nz = -y * sin(dx) + z * cos(dx);
@@ -227,9 +233,9 @@ void rotate(triangle_t *triangle, vertex_t center, double dx, double dy, double 
         ny = -x * sin(dz) + y * cos(dz);
         nz = z;
 
-        triangle->processed_vertexes[i][0] = (int) nx;
-        triangle->processed_vertexes[i][1] = (int) ny;
-        triangle->processed_vertexes[i][2] = (int) nz;
+        triangle->processed_vertexes[i][0] = nx;
+        triangle->processed_vertexes[i][1] = ny;
+        triangle->processed_vertexes[i][2] = nz;
     }
 
     push(triangle, center[0], center[1], center[2]);
