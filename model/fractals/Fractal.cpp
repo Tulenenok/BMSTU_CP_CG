@@ -134,26 +134,38 @@ void Fractal::print_links()
 
 void Fractal::generate_cubes(std::vector<triangle_t *> &polygons)
 {
-    for (auto l: links)
+    for (auto link: links)
     {
-        double len_vertex = l.get_len();
-        int count_cubes = ceil(len_vertex / default_a);
+        double L = link.get_len();
         color_t color = {0, 0, 255};
 
-        int d_x = l.from[0] - l.to[0];
-        int d_y = l.from[1] - l.to[1];
-        int d_z = l.from[2] - l.to[2];
+        //  Общие приращения по всем координатам
+        int d_X = link.from[0] - link.to[0];
+        int d_Y = link.from[1] - link.to[1];
+        int d_Z = link.from[2] - link.to[2];
 
-        int c_x = l.from[0];
-        int c_y = l.from[1];
-        int c_z = l.from[2];
+        double k = 1.0 / (default_n - 1);
 
-        for (int i = 0; i < count_cubes; i++)
+        int a;
+        if (abs(d_X) >= abs(d_Y) and abs(d_X) >= abs(d_Z))
+            a = ceil(k * L / (default_n - 1));
+        else if (abs(d_Y) >= abs(d_X) and abs(d_Y) >= abs(d_Z))
+            a = ceil(k * L / (default_n - 1));
+        else
+            a = ceil(k * L / (default_n - 1));
+
+        // Если максимальное приращение по оси X
+            // Рассчитываем координаты центров кубов
+        int c_x = link.from[0];
+        int c_y = link.from[1];
+        int c_z = link.from[2];
+
+        for (int i = 0; i < default_n; i++)
         {
-            c_x += floor(default_a / len_vertex * d_x);
-            c_y += floor(default_a / len_vertex * d_y);
-            c_z += floor(default_a / len_vertex * d_z);
-            add_cube(polygons, c_x, c_y, c_z, default_a, &color);
+            add_cube(polygons, c_x, c_y, c_z, a, &color);
+            c_x += round(k * d_X);
+            c_y += round(k * d_Y);
+            c_z += round(k * d_Z);
         }
     }
 }

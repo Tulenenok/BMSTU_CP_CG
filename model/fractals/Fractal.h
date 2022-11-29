@@ -24,6 +24,7 @@ public:
     void generate_cubes(std::vector<triangle_t *> &polygons);
 
     int default_a{3};
+    int default_n{3};       //  Дефолное количество кубиков на отрезок
 
 private:
     Params params;

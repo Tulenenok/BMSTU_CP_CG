@@ -96,7 +96,7 @@ void test_fractal_paporotnik()
 Fractal test_fractal_show()
 {
     Rules rules({'A', 'B'}, {R"(B[+A]||||[+A]||||[+A]||||BA)", "BB"});
-    Params params(300, 300, 0, -90, 30, 15, "A", rules, 1);
+    Params params(300, 300, 0, 90, 30, 15, "A", rules, 1);
 
     Fractal fractal;
     fractal.setParams(params);
