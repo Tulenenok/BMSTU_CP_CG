@@ -12,10 +12,10 @@
 
 void group_reset_processed_vertexes(std::vector<triangle_t*> triangles);
 void group_reset_processed_color(std::vector<triangle_t*> triangles);
-void group_center(std::vector<triangle_t*> triangles, vertex_t center);
-void group_push(std::vector<triangle_t*> triangles, int dx, int dy, int dz);
-void group_scale(std::vector<triangle_t*> triangles, vertex_t center, double dx, double dy, double dz);
-void group_rotate(std::vector<triangle_t*> triangles, vertex_t center, double dx, double dy, double dz);
+void group_center(std::vector<triangle_t*> triangles, double center[3]);
+void group_push(std::vector<triangle_t*> triangles, double dx, double dy, double dz);
+void group_scale(std::vector<triangle_t*> triangles, double center[3], double dx, double dy, double dz);
+void group_rotate(std::vector<triangle_t*> triangles, double center[3], double dx, double dy, double dz);
 
 void group_add(std::vector<triangle_t*> &triangles, triangle_t* triangle);
 void group_shading(std::vector<triangle_t*> &triangles, std::vector<light_source_t*> &light_sources);

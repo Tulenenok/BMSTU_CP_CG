@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "handle_buttons.h"
 #include "../server/z_buffer.h"
 #include "../server/triangle_vector.h"
@@ -8,7 +9,7 @@
 int Handler::load_figure(screen_t *screen_matrix)
 {
     color_t color = {0, 0, 255};
-    add_cube(polygons, 300, 300, 0, 100, &color);
+    add_cube(polygons, 300, 300, 0, 30, &color);
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
@@ -18,7 +19,7 @@ int Handler::load_figure(screen_t *screen_matrix)
 
 int Handler::scale(screen_t *screen_matrix, double kx, double ky, double kz)
 {
-    vertex_t center;
+    double center[3];
     group_center(polygons, center);
     group_scale(polygons, center,  kx, ky , kz);
 
@@ -28,10 +29,10 @@ int Handler::scale(screen_t *screen_matrix, double kx, double ky, double kz)
     return 0;
 }
 
-#define PI 3.141592
+#define PI M_PI
 
 int Handler::rotate(screen_t *screen_matrix, double ax, double ay, double az) {
-    vertex_t center;
+    double center[3];
     group_center(polygons, center);
     group_rotate(polygons, center,  ax * PI / 180, ay * PI / 180 , az * PI / 180);
 
@@ -42,7 +43,7 @@ int Handler::rotate(screen_t *screen_matrix, double ax, double ay, double az) {
 }
 
 int Handler::push(screen_t *screen_matrix, double dx, double dy, double dz) {
-    group_push(polygons, (int)dx, (int)dy , (int)dz);
+    group_push(polygons, dx, dy , dz);
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);

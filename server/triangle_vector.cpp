@@ -20,9 +20,9 @@ void group_reset_processed_color(std::vector<triangle_t*> triangles) {
     }
 }
 
-void group_center(std::vector<triangle_t*> triangles, vertex_t center) {
-    int mins[3];
-    int maxs[3];
+void group_center(std::vector<triangle_t*> triangles, double center[3]) {
+    double mins[3];
+    double maxs[3];
 
     if (triangles.empty()) {
         for (int i = 0; i < 3; i++) {
@@ -31,16 +31,16 @@ void group_center(std::vector<triangle_t*> triangles, vertex_t center) {
         }
     } else {
         for (int i = 0; i < 3; i++) {
-            mins[i] = triangles[0]->initial_vertexes[0][i];
-            maxs[i] = triangles[0]->initial_vertexes[0][i];
+            mins[i] = triangles[0]->processed_vertexes[0][i];
+            maxs[i] = triangles[0]->processed_vertexes[0][i];
         }
     }
 
     for (int i = 0; i < triangles.size(); i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
-                mins[k] = mins[k] > triangles[i]->initial_vertexes[j][k] ? triangles[i]->initial_vertexes[j][k] : mins[k];
-                maxs[k] = maxs[k] < triangles[i]->initial_vertexes[j][k] ? triangles[i]->initial_vertexes[j][k] : maxs[k];
+                mins[k] = mins[k] > triangles[i]->processed_vertexes[j][k] ? triangles[i]->processed_vertexes[j][k] : mins[k];
+                maxs[k] = maxs[k] < triangles[i]->processed_vertexes[j][k] ? triangles[i]->processed_vertexes[j][k] : maxs[k];
             }
         }
     }
@@ -50,19 +50,19 @@ void group_center(std::vector<triangle_t*> triangles, vertex_t center) {
     }
 }
 
-void group_push(std::vector<triangle_t*> triangles, int dx, int dy, int dz) {
+void group_push(std::vector<triangle_t*> triangles, double dx, double dy, double dz) {
     for (int i = 0; i < triangles.size(); i++) {
         push(triangles[i], dx, dy, dz);
     }
 }
 
-void group_scale(std::vector<triangle_t*> triangles, vertex_t center, double dx, double dy, double dz) {
+void group_scale(std::vector<triangle_t*> triangles, double center[3], double dx, double dy, double dz) {
     for (int i = 0; i < triangles.size(); i++) {
         scale(triangles[i], center, dx, dy, dz);
     }
 }
 
-void group_rotate(std::vector<triangle_t*> triangles, vertex_t center, double dx, double dy, double dz) {
+void group_rotate(std::vector<triangle_t*> triangles, double center[3], double dx, double dy, double dz) {
     for (int i = 0; i < triangles.size(); i++) {
         rotate(triangles[i], center, dx, dy, dz);
     }

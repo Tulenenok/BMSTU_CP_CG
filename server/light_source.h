@@ -8,11 +8,11 @@
 #include "vertex_t.h"
 
 typedef struct {
-    vertex_t vertex;
+    double vertex[3];
 } light_source_t;
 
 light_source_t *allocate_light_source_t();
 void free_light_source_t(light_source_t* ls);
-light_source_t *create_light_source_t(int x, int y, int z);
+light_source_t *create_light_source_t(double x, double y, double z);
 
 #endif //C_VERSION_LIGHT_SOURCE_H

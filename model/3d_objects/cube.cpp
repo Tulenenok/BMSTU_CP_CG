@@ -12,7 +12,7 @@ void add_cube(std::vector<triangle_t*>& triangles, int x, int y, int z, int a, c
 //    Нижняя грань
     triangle_t *tr1 = allocate_triangle_t();
     set_vertex_by_index(tr1, 0, x - a, y - a, z - a);
-    set_vertex_by_index(tr1, 1, x - a, y - a, z - a);
+    set_vertex_by_index(tr1, 1, x - a, y - a, z + a);
     set_vertex_by_index(tr1, 2, x + a, y - a, z - a);
     set_color(tr1, color);
     calculate_center(tr1);
@@ -21,7 +21,7 @@ void add_cube(std::vector<triangle_t*>& triangles, int x, int y, int z, int a, c
 
     triangle_t *tr2 = allocate_triangle_t();
     set_vertex_by_index(tr2, 0, x + a, y - a, z + a);
-    set_vertex_by_index(tr2, 1, x - a, y - a, z - a);
+    set_vertex_by_index(tr2, 1, x - a, y - a, z + a);
     set_vertex_by_index(tr2, 2, x + a, y - a, z - a);
     set_color(tr2, color);
     calculate_center(tr2);
@@ -31,7 +31,7 @@ void add_cube(std::vector<triangle_t*>& triangles, int x, int y, int z, int a, c
 //    Верхняя грань
     triangle_t *tr3 = allocate_triangle_t();
     set_vertex_by_index(tr3, 0, x - a, y + a, z - a);
-    set_vertex_by_index(tr3, 1, x - a, y + a, z - a);
+    set_vertex_by_index(tr3, 1, x - a, y + a, z + a);
     set_vertex_by_index(tr3, 2, x + a, y + a, z - a);
     set_color(tr3, color);
     calculate_center(tr3);
@@ -40,7 +40,7 @@ void add_cube(std::vector<triangle_t*>& triangles, int x, int y, int z, int a, c
 
     triangle_t *tr4 = allocate_triangle_t();
     set_vertex_by_index(tr4, 0, x + a, y + a, z + a);
-    set_vertex_by_index(tr4, 1, x - a, y + a, z - a);
+    set_vertex_by_index(tr4, 1, x - a, y + a, z + a);
     set_vertex_by_index(tr4, 2, x + a, y + a, z - a);
     set_color(tr4, color);
     calculate_center(tr4);

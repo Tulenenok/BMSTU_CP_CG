@@ -17,32 +17,32 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
     int min_y_ind = ind_of_min_of_axis(triangle, 1);
     int mid_y_ind = ind_of_mid_of_axis(triangle, 1);
 
-    int ymax = triangle->processed_vertexes[max_y_ind][1];
-    int ymin = triangle->processed_vertexes[min_y_ind][1];
-    int ymid = triangle->processed_vertexes[mid_y_ind][1];
-    int xmax = triangle->processed_vertexes[max_y_ind][0];
-    int xmin = triangle->processed_vertexes[min_y_ind][0];
-    int xmid = triangle->processed_vertexes[mid_y_ind][0];
-    int zmax = triangle->processed_vertexes[max_y_ind][2];
-    int zmin = triangle->processed_vertexes[min_y_ind][2];
-    int zmid = triangle->processed_vertexes[mid_y_ind][2];
+    double ymax = triangle->processed_vertexes[max_y_ind][1];
+    double ymin = triangle->processed_vertexes[min_y_ind][1];
+    double ymid = triangle->processed_vertexes[mid_y_ind][1];
+    double xmax = triangle->processed_vertexes[max_y_ind][0];
+    double xmin = triangle->processed_vertexes[min_y_ind][0];
+    double xmid = triangle->processed_vertexes[mid_y_ind][0];
+    double zmax = triangle->processed_vertexes[max_y_ind][2];
+    double zmin = triangle->processed_vertexes[min_y_ind][2];
+    double zmid = triangle->processed_vertexes[mid_y_ind][2];
 
 //  Если треугольник целиком выше или ниже уровня
     if (y < triangle->processed_vertexes[min_y_ind][1] || y > triangle->processed_vertexes[max_y_ind][1]) {
-        std::cout << "y" << y << "pos 1" << std::endl;
+//        std::cout << "y" << y << "pos 1" << std::endl;
         return;
     }
 
 //   Если треугольник выраждается в точку или линию - пропускаем этот треугольник
     if (max_x_ind == min_x_ind || max_y_ind == min_y_ind) {
-        std::cout << "y" << y << "pos 2" << std::endl;
+//        std::cout << "y" << y << "pos 2" << std::endl;
         return;
     }
 
     if ((y == triangle->processed_vertexes[max_y_ind][1] || y == triangle->processed_vertexes[min_y_ind][1]) && count_value_with_axis(triangle, 1, y) == 1) {
         int y_ind = index_with_axis(triangle, 1, y);
-        int x = triangle->processed_vertexes[y_ind][0];
-        int z = triangle->processed_vertexes[y_ind][2];
+        int x = ceil(triangle->processed_vertexes[y_ind][0]);
+        int z = ceil(triangle->processed_vertexes[y_ind][2]);
 
         if (x >= 0 && x < screen->width) {
             if (depth_arr[x] > z) {
@@ -51,7 +51,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
             }
         }
 
-        std::cout << "y" << y << "pos 3" << std::endl;
+//        std::cout << "y" << y << "pos 3" << std::endl;
         return;
     }
 
@@ -63,7 +63,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
 //    if (y > ymid && fabs(ymin - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
     if (y > ymid) {
 
-        std::cout << y << " higher" << std::endl;
+//        std::cout << y << " higher" << std::endl;
 
 //      Этот блок одинаков для каждой ветки
         double d_ya = ymax - ymin;
@@ -81,7 +81,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
 //    } else if (fabs(ymax - ymid) > 1e-6 && fabs(ymin - ymax) > 1e-6) {
     } else if (y < ymid) {
 
-        std::cout << y << " lower" << std::endl;
+//        std::cout << y << " lower" << std::endl;
 
 //      Этот блок одинаков для каждой ветки
         double d_ya = ymax - ymin;
@@ -102,7 +102,7 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
         finish_z = zmin + d_zb * (y - ymin) / d_yb;
 
     } else {
-        std::cout << y << " equal" << std::endl;
+//        std::cout << y << " equal" << std::endl;
 
 //      Этот блок одинаков для каждой ветки
         double d_ya = ymax - ymin;
@@ -115,18 +115,6 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
         finish_z = zmid;
     }
 
-//// Определяем, где относительно среднего значения y мы находимся
-//// ситуацию, когда треугольник выраждается в точку или отрезок не расссматриваем
-//    if (y > ymid) {
-////        работаем с гранями ymid-ymax & ymin-ymax
-//
-//    } else if (y == ymid) {
-//
-//    } else {
-////        работаем с гранями ymid-ymin & ymin-ymax
-//
-//    }
-
     if (start_x > finish_x) {
         double tmp = start_x;
         start_x = finish_x;
@@ -137,15 +125,19 @@ void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_
     }
 
     if (fabs(finish_x - start_x) < 1e-2) {
-        std::cout << "y" << y << "pos 5" << std::endl;
+//        std::cout << "y" << y << "pos 5" << std::endl;
         return;
     }
 
     double dz = (finish_z - start_z) / (finish_x - start_x);
 
-    for (int x = (int) start_x - 1; x < (int) finish_x + 1; x++) {
+    for (int x = ceil(start_x - 1); x < ceil(finish_x + 1); x++) {
         if (x >= 0 && x < screen->width) {
             double z = start_z + dz * (x - start_x);
+
+//            if (triangle->processed_color.r > 200) {
+//                std::cout << "[DBG][ERROR]" << z << "\n";
+//            }
 
             if (depth_arr[x] > z) {
                 depth_arr[x] = z;
@@ -161,7 +153,7 @@ void complete_process_level(screen_t *screen, std::vector<triangle_t*> triangles
         auto *depth_array = (double*) malloc(sizeof(double) * screen->width);
 
         for (int i = 0; i < screen->width; i++) {
-            depth_array[i] = INT_MAX;
+            depth_array[i] = 1e33;
         }
 
         for (int i = 0; i < triangles.size(); i++) {

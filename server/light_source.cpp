@@ -15,7 +15,7 @@ void free_light_source_t(light_source_t* ls) {
     free(ls);
 }
 
-light_source_t *create_light_source_t(int x, int y, int z) {
+light_source_t *create_light_source_t(double x, double y, double z) {
     auto res = allocate_light_source_t();
 
     res->vertex[0] = x;

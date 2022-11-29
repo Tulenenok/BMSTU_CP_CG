@@ -141,7 +141,7 @@ void test_rotate_cube(screen_t *screen) {
     color_t color = {0, 0, 255};
     add_cube(cube, 300, 300, 0, 100, &color);
 
-    vertex_t center;
+    double center[3];
     group_center(cube, center);
     group_rotate(cube, center,  30 * 3.141592 / 180, 30 * 3.141592 / 180, 30 * 3.141592 / 180);
 
@@ -153,7 +153,7 @@ void test_scale_cube(screen_t *screen) {
     color_t color = {0, 0, 255};
     add_cube(cube, 300, 300, 0, 100, &color);
 
-    vertex_t center;
+    double center[3];
     group_center(cube, center);
     group_scale(cube, center, -2, 1, 0.5);
 
@@ -165,7 +165,7 @@ void test_push_cube(screen_t *screen) {
     color_t color = {0, 0, 255};
     add_cube(cube, 300, 300, 0, 100, &color);
 
-    vertex_t center;
+    double center[3];
     group_center(cube, center);
     group_push(cube, 100, -100, 100);
 
@@ -178,7 +178,7 @@ void test_light(screen_t *screen)
     color_t color = {0, 0, 255};
     add_cube(cube, 300, 300, 0, 100, &color);
 
-    vertex_t center;
+    double center[3];
     group_center(cube, center);
     group_rotate(cube, center,  0, 30 * PI / 180 , 0);
 
