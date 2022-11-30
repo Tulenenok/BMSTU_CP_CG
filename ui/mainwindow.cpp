@@ -5,6 +5,8 @@
 #include <iostream>
 #include "mainwindow.h"
 #include "ui_MainWindow.h"
+#include <string>
+#include <vector>
 
 #include "../tests/all_tests.h"
 
@@ -24,8 +26,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->ScaleB, SIGNAL (clicked()),this, SLOT(on_scaleButton_clicked()));
     connect(ui->AddLightB, SIGNAL (clicked()),this, SLOT(on_addLightButton_clicked()));
 
+    connect(ui->Preset, SIGNAL(activated(int)), this, SLOT(on_preset_clicked(int)));
+
     screen_properties_t screenProperties {ui->graphicsView->width(), ui->graphicsView->height()};
     screen_matrix = allocate_screen_t(&screenProperties);
+
+    setFractalForm(get_spiral());
 }
 
 MainWindow::~MainWindow() {
@@ -135,4 +141,39 @@ void MainWindow::drawLine(vertex_t p1, vertex_t p2)
     scene->addLine(p1[0], p1[1], p2[0], p2[1]);
 
 //   scene->addLine(p1[0] + w / 2, -p1[1] + h / 5 * 4, p2[0] + w / 2, -p2[1] + h / 5 * 4);
+}
+
+void MainWindow::setFractalForm(preset_setting_t preset)
+{
+    ui->axiom->setText((" " + preset.params.axiom).c_str());
+    ui->consts->setText((" " + std::to_string(preset.params.n)).c_str());
+    ui->angle->setText((" " + std::to_string(preset.params.delta)).c_str());
+
+    std::vector<QLineEdit *> rules = {ui->rule1, ui->rule2, ui->rule3, ui->rule4, ui->rule5};
+
+    auto it = preset.params.rules.data.begin();
+    int i = 0;
+    for (; it != preset.params.rules.data.end(); it++, i++) {
+        rules[i]->setText((" " + std::string(1, it->first) + ": " + it->second).c_str());
+        rules[i]->setCursorPosition(0);
+    }
+
+    for (; i < 5; i++)
+        rules[i]->setText("");
+}
+
+void MainWindow::on_preset_clicked(int index)
+{
+    if (index == 0)
+        setFractalForm(get_spiral());
+    else if (index == 1)
+        setFractalForm(get_fern());
+    else if (index == 2)
+        setFractalForm(get_ivy());
+    else if (index == 3)
+        setFractalForm(get_verbena());
+}
+
+void MainWindow::getFractalForm(preset_setting_t preset) {
+
 }

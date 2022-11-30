@@ -95,11 +95,11 @@ void test_fractal_paporotnik()
 
 Fractal test_fractal_show()
 {
-//    Rules rules({'A', 'C', 'D'},
-//                {R"([++++++++++++++EC]B^+B[--------------ED]B+BA)",
-//                 R"([---------EE][+++++++++EE]B__+C)",
-//                 "[---------EE][+++++++++EE]B__-D"});
-//    Params params(300, 300, 0, -90, 4, 10, "EEEA", rules, 10);
+    Rules rules({'A', 'C', 'D'},
+                {R"([++++++++++++++EC]B^+B[--------------ED]B+BA)",
+                 R"([---------EE][+++++++++EE]B__+C)",
+                 "[---------EE][+++++++++EE]B__-D"});
+    Params params(300, 300, 0, -90, 4, 10, "EEEA", rules, 10);
 
 
 //    Rules rules({'A', 'B'}, {R"(B[+A]||||[+A]||||[+A]||||BA)", "BB"});
@@ -108,8 +108,8 @@ Fractal test_fractal_show()
 //    Rules rules({'A'}, {"/A[++A]-|A[--A]+//A"});
 //    Params params(300, 600, 0, -90, -18, 8, "--A", rules, 4);
 
-    Rules rules({'A'}, {"A-^A"});
-    Params params(200, 300, 0, 90, -12, 30, "A", rules, 8);
+//    Rules rules({'A'}, {"A-^A"});
+//    Params params(200, 300, 0, 90, -12, 30, "A", rules, 8);
 
     Fractal fractal;
     fractal.setParams(params);

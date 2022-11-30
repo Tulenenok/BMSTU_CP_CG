@@ -138,7 +138,8 @@ void Fractal::generate_cubes(std::vector<triangle_t *> &polygons)
     for (auto link: links)
     {
         double L = link.get_len();
-        color_t color = {230,168,215};
+//        color_t color = {230,168,215};
+        color_t color = {200,255,0};
 
         //  Общие приращения по всем координатам
         int d_X = link.from[0] - link.to[0];

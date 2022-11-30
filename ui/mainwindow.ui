@@ -634,7 +634,7 @@
        <bool>false</bool>
       </property>
       <property name="text">
-       <string>Загрузить нечто из файла</string>
+       <string>Нарисовать фрактал</string>
       </property>
       <property name="iconSize">
        <size>
@@ -803,7 +803,7 @@
         <rect>
          <x>19</x>
          <y>29</y>
-         <width>301</width>
+         <width>308</width>
          <height>361</height>
         </rect>
        </property>
@@ -818,12 +818,23 @@
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_12">
           <item row="1" column="1">
-           <widget class="QComboBox" name="styleType"/>
+           <widget class="QComboBox" name="styleType">
+            <item>
+             <property name="text">
+              <string>Куб</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Линия</string>
+             </property>
+            </item>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="label_9">
             <property name="text">
-             <string>Константы</string>
+             <string>Кол-во итераций</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -871,7 +882,31 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QComboBox" name="Preset"/>
+           <widget class="QComboBox" name="Preset">
+            <property name="editable">
+             <bool>false</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>Спираль</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Папоротник</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Плющ</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Вербена</string>
+             </property>
+            </item>
+           </widget>
           </item>
           <item row="5" column="1">
            <widget class="QLineEdit" name="rule1">
