@@ -124,3 +124,8 @@ void add_cube(std::vector<triangle_t*>& triangles, int x, int y, int z, int a, c
     group_add(triangles, tr12);
 
 }
+
+void add_cube_use_struct(std::vector<triangle_t*>& triangles, cube_t cube)
+{
+    add_cube(triangles, cube.x, cube.y, cube.z, cube.a, &(cube.color));
+}

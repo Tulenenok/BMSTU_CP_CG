@@ -46,18 +46,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>30</red>
-        <green>30</green>
-        <blue>30</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>203</red>
-        <green>203</green>
-        <blue>203</blue>
+        <red>184</red>
+        <green>187</green>
+        <blue>189</blue>
        </color>
       </brush>
      </colorrole>
@@ -93,18 +93,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>30</red>
-        <green>30</green>
-        <blue>30</blue>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>203</red>
-        <green>203</green>
-        <blue>203</blue>
+        <red>184</red>
+        <green>187</green>
+        <blue>189</blue>
        </color>
       </brush>
      </colorrole>
@@ -140,18 +140,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>203</red>
-        <green>203</green>
-        <blue>203</blue>
+        <red>184</red>
+        <green>187</green>
+        <blue>189</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>203</red>
-        <green>203</green>
-        <blue>203</blue>
+        <red>184</red>
+        <green>187</green>
+        <blue>189</blue>
        </color>
       </brush>
      </colorrole>
@@ -441,12 +441,18 @@
             <property name="text">
              <string>Цвет</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="label_9">
             <property name="text">
              <string>Z центра</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -455,12 +461,18 @@
             <property name="text">
              <string>Примитив</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_7">
             <property name="text">
              <string>X центра</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -469,12 +481,18 @@
             <property name="text">
              <string>Длина стороны</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_8">
             <property name="text">
              <string>Y центра</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -543,18 +561,28 @@
           </item>
           <item row="3" column="1">
            <widget class="QDoubleSpinBox" name="Ycenter">
+            <property name="maximum">
+             <double>720.990000000000009</double>
+            </property>
             <property name="value">
-             <double>99.989999999999995</double>
+             <double>300.990000000000009</double>
             </property>
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QDoubleSpinBox" name="Zcenter"/>
+           <widget class="QDoubleSpinBox" name="Zcenter">
+            <property name="maximum">
+             <double>720.990000000000009</double>
+            </property>
+           </widget>
           </item>
           <item row="5" column="1">
            <widget class="QDoubleSpinBox" name="Acube">
+            <property name="maximum">
+             <double>500.990000000000009</double>
+            </property>
             <property name="value">
-             <double>50.000000000000000</double>
+             <double>100.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -812,6 +840,70 @@
     </item>
     <item row="4" column="0">
      <widget class="QGroupBox" name="groupBox">
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>140</red>
+            <green>140</green>
+            <blue>140</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>208</red>
+            <green>208</green>
+            <blue>208</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>140</red>
+            <green>140</green>
+            <blue>140</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>208</red>
+            <green>208</green>
+            <blue>208</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>208</red>
+            <green>208</green>
+            <blue>208</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>208</red>
+            <green>208</green>
+            <blue>208</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>

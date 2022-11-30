@@ -6,10 +6,15 @@
 #include "../model/3d_objects/cube.h"
 
 
-int Handler::load_figure(screen_t *screen_matrix)
+int Handler::load_figure(screen_t *screen_matrix, object_t obj)
 {
-    color_t color = {0, 0, 255};
-    add_cube(polygons, 300, 300, 0, 30, &color);
+    if(obj.type_obj == 0)
+        add_cube_use_struct(polygons, obj.params.cube);
+    else
+    {
+        std::cout << "такое выводить не могем";
+        return 1;
+    }
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
@@ -58,5 +63,12 @@ int Handler::add_light_source(screen_t *screen_matrix, double x, double y, doubl
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
     z_buffer_render(screen_matrix, polygons);
+    return 0;
+}
+
+int Handler::clean_handler()
+{
+    polygons.clear();
+    light_sources.clear();
     return 0;
 }

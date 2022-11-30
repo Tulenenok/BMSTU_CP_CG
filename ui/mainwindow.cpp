@@ -33,23 +33,44 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_loadButton_clicked() {
-    handler.load_figure(screen_matrix);
-    fillScene();
+color_t get_color(int ind)
+{
+    if (ind == 0)
+        return {255, 0, 0};
+    if (ind == 1)
+        return {255, 153, 0};
+    if (ind == 2)
+        return {255, 255, 0};
+    if (ind == 3)
+        return {0, 255, 0};
+    if (ind == 4)
+        return {66, 170, 255};
+    if (ind == 5)
+        return {0, 0, 255};
+    return {139, 0, 255};
+}
 
-//    Fractal fr = test_fractal_show();
-//    for(auto l: fr.links)
-//        drawLine(l.from, l.to);
+void MainWindow::on_loadButton_clicked()
+{
+    object_t obj;
+    obj.type_obj = ui->comboBox->currentIndex();
+    obj.params.cube.color = get_color(ui->comboBox_2->currentIndex());
+
+    obj.params.cube.x = ui->Xcenter->value();
+    obj.params.cube.y= ui->Ycenter->value();
+    obj.params.cube.z = ui->Zcenter->value();
+    obj.params.cube.a = ui->Acube->value() / 2;
+
+    handler.load_figure(screen_matrix, obj);
+    fillScene();
 
     std::cout << "Load success\n";
 }
 
 void MainWindow::on_cleanButton_clicked(){
-    ui->graphicsView->scene()->clear();
-
-    free_screen_t(screen_matrix);
-    screen_properties_t screenProperties {ui->graphicsView->width(), ui->graphicsView->height()};
-    screen_matrix = allocate_screen_t(&screenProperties);
+    reset_screen(screen_matrix);
+    handler.clean_handler();
+    fillScene();
 }
 
 void MainWindow::on_pushButton_clicked()
