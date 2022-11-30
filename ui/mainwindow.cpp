@@ -216,7 +216,7 @@ preset_setting_t MainWindow::getFractalForm()
     else if (c == 1)
         preset.color = {255,151,187};       // розовый
     else if (c == 2)
-        preset.color = {53,102,204};        // фиолетовый
+        preset.color = {139,0,255};        // фиолетовый
     else if (c == 3)
         preset.color = {255, 255, 102};     // желтый
     else if (c == 4)

@@ -12,7 +12,7 @@
 #define SPIRAL_ALPHA 90
 
 #define FERN_X 300
-#define FERN_Y 300
+#define FERN_Y 600
 #define FERN_Z 0
 #define FERN_STEP 10
 #define FERN_ALPHA -90
@@ -24,7 +24,7 @@
 #define IVY_ALPHA -90
 
 #define VERBENA_X 300
-#define VERBENA_Y 300
+#define VERBENA_Y 600
 #define VERBENA_Z 0
 #define VERBENA_STEP 15
 #define VERBENA_ALPHA -90
