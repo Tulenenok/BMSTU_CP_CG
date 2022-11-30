@@ -7,6 +7,7 @@
 
 #include "../../server/vertex_t.h"
 #include <string>
+#include "../3d_objects/cube.h"
 
 class Link
 {
@@ -14,6 +15,7 @@ public:
     Link() {};
     Link(vertex_t f, vertex_t t);
     void print();
+    double get_len();
 
     vertex_t from;
     vertex_t to;

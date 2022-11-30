@@ -25,4 +25,6 @@ void set_whole_change_false(screen_t *matrix);
 void fill_screen(screen_t *matrix, color_t *color);
 void set_default_color(screen_t *matrix, color_t *color);
 
+void reset_screen(screen_t *matrix);
+
 #endif //C_VERSION_SCREEN_T_H

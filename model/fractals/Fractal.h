@@ -21,6 +21,10 @@ public:
     void print_links();
 
     std::vector<Link> links;
+    void generate_cubes(std::vector<triangle_t *> &polygons);
+
+    color_t color;
+    int default_n{3};       //  Дефолное количество кубиков на отрезок
 
 private:
     Params params;
