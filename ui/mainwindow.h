@@ -25,7 +25,7 @@ public:
 
     void drawLine(vertex_t p1, vertex_t p2);
     void setFractalForm(preset_setting_t preset);
-    void getFractalForm(preset_setting_t preset);
+    preset_setting_t getFractalForm();
 
 private slots:
     void on_loadButton_clicked();

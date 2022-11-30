@@ -3,6 +3,7 @@
 
 #include "Params.h"
 #include "../../server/color_t.h"
+#include "consts.h"
 
 typedef struct{
     Params params;

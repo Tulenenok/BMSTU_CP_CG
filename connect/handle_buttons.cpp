@@ -4,14 +4,19 @@
 #include "../server/z_buffer.h"
 #include "../server/triangle_vector.h"
 #include "../model/3d_objects/cube.h"
+#include "../model/fractals/Fractal.h"
 
 
-int Handler::load_figure(screen_t *screen_matrix)
+int Handler::load_figure(screen_t *screen_matrix, preset_setting_t& preset)
 {
-//    color_t color = {0, 0, 255};
-//    add_cube(polygons, 300, 300, 0, 30, &color);
+    Fractal fractal;
+    fractal.setParams(preset.params);
+    fractal.color = preset.color;
+    std::cout << fractal.color.r;
 
-    std::cout << polygons.size();
+    fractal.calculate();
+    fractal.generate_cubes(polygons);
+
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
     z_buffer_render(screen_matrix, polygons);
@@ -66,4 +71,11 @@ int Handler::add_light_source(screen_t *screen_matrix, double x, double y, doubl
 void Handler::push_polygons(std::vector<triangle_t *> pp)
 {
     polygons.insert( polygons.end(), pp.begin(), pp.end() );
+}
+
+int Handler::clean_handler()
+{
+    polygons.clear();
+    light_sources.clear();
+    return 0;
 }

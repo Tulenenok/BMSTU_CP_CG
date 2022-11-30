@@ -39,15 +39,14 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_loadButton_clicked() {
-    Fractal fr = test_fractal_show();
-    std::vector<triangle_t*> pol;
-    fr.generate_cubes(pol);
+void MainWindow::on_loadButton_clicked()
+{
+    reset_screen(screen_matrix);
+    handler.clean_handler();
 
-    handler.push_polygons(pol);
-    std::cout << fr.links.size() << "\n\n";
+    preset_setting_t preset = getFractalForm();
 
-    handler.load_figure(screen_matrix);
+    handler.load_figure(screen_matrix, preset);
     fillScene();
 
 //    for(auto l: fr.links)
@@ -56,12 +55,11 @@ void MainWindow::on_loadButton_clicked() {
     std::cout << "Load success\n";
 }
 
-void MainWindow::on_cleanButton_clicked(){
-    ui->graphicsView->scene()->clear();
-
-    free_screen_t(screen_matrix);
-    screen_properties_t screenProperties {ui->graphicsView->width(), ui->graphicsView->height()};
-    screen_matrix = allocate_screen_t(&screenProperties);
+void MainWindow::on_cleanButton_clicked()
+{
+    reset_screen(screen_matrix);
+    handler.clean_handler();
+    fillScene();
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -158,7 +156,7 @@ void MainWindow::setFractalForm(preset_setting_t preset)
         rules[i]->setCursorPosition(0);
     }
 
-    for (; i < 5; i++)
+    for (; i < rules.size(); i++)
         rules[i]->setText("");
 }
 
@@ -174,6 +172,59 @@ void MainWindow::on_preset_clicked(int index)
         setFractalForm(get_verbena());
 }
 
-void MainWindow::getFractalForm(preset_setting_t preset) {
+preset_setting_t MainWindow::getFractalForm()
+{
+    preset_setting_t preset;
 
+    preset.params.axiom = ui->axiom->text().toStdString();
+    preset.params.n = ui->consts->text().toInt();
+    preset.params.delta = ui->angle->text().toFloat();
+
+    std::vector<QLineEdit *> rules = {ui->rule1, ui->rule2, ui->rule3, ui->rule4, ui->rule5};
+    std::vector<char> from;
+    std::vector<std::string> to;
+
+    for (auto & i : rules)
+    {
+        std::string rule = i->text().toStdString();
+        if (!rule.empty())
+        {
+            from.push_back(rule[1]);
+            to.push_back(rule.substr(4, rule.size() - 2));
+        }
+    }
+    Rules r{from, to};
+    preset.params.rules = r;
+
+    int ind = ui->Preset->currentIndex();
+
+    int x_list[4] = {SPIRAL_X, FERN_X, IVY_X, VERBENA_X};
+    int y_list[4] = {SPIRAL_Y, FERN_Y, IVY_Y, VERBENA_Y};
+    int z_list[4] = {SPIRAL_Z, FERN_Z, IVY_Z, VERBENA_Z};
+    float a_list[4] = {SPIRAL_ALPHA, FERN_ALPHA, IVY_ALPHA, VERBENA_ALPHA};
+    float s_list[4] = {SPIRAL_STEP, FERN_STEP, IVY_STEP, VERBENA_STEP};
+
+    preset.params.p[0] = x_list[ind];
+    preset.params.p[1] = y_list[ind];
+    preset.params.p[2] = z_list[ind];
+    preset.params.alpha = a_list[ind];
+    preset.params.step = s_list[ind];
+
+    int c = ui->comboBox->currentIndex();
+    if (c == 0)
+        preset.color = {200, 255, 0};       // зеленый
+    else if (c == 1)
+        preset.color = {255,151,187};       // розовый
+    else if (c == 2)
+        preset.color = {53,102,204};        // фиолетовый
+    else if (c == 3)
+        preset.color = {255, 255, 102};     // желтый
+    else if (c == 4)
+        preset.color = {51, 51, 255};       // синий
+    else if (c == 5)
+        preset.color = {255, 51, 51};       // красный
+    else if (c == 6)
+        preset.color = {150, 75, 0};        // коричневый
+
+    return preset;
 }
