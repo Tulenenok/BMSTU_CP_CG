@@ -183,7 +183,9 @@ void threaded_z_buffer_render(screen_t *screen, const std::vector<triangle_t*> t
 {
     std::vector<std::thread> threads;
 
-    int n = 7;
+    auto cores_count = std::thread::hardware_concurrency(); //Узнаем к-во ядер
+    int n = cores_count - 1;
+    std::cout << n << std::endl;
 
 //    std::thread t1([]() {
 //        complete_process_level((screen, triangles, y));
