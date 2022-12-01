@@ -7,6 +7,7 @@
 #include "../../server/triangle_t.h"
 #include "../../server/triangle_vector.h"
 
+
 void add_cube(std::vector<triangle_t*>& triangles, int x, int y, int z, int a, color_t *color) {
 
 //    Нижняя грань

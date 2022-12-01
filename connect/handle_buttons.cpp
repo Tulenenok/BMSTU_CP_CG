@@ -4,12 +4,13 @@
 #include "../server/z_buffer.h"
 #include "../server/triangle_vector.h"
 #include "../model/3d_objects/cube.h"
+#include "../model/3d_objects/sphere.h"
 
 
 int Handler::load_figure(screen_t *screen_matrix)
 {
     color_t color = {0, 0, 255};
-    add_cube(polygons, 300, 300, 0, 30, &color);
+    add_sphere(polygons, 300, 300, 0, 100, &color);
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
