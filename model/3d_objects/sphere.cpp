@@ -91,7 +91,7 @@ void add_sphere(std::vector<triangle_t*>& triangles, double x, double y, double 
     s.pos.y = y;
     s.pos.z = z;
 
-    s.init(a, 0);
+    s.init(a, 4);
 
     auto length = s.size();
     const VertexSphere *vertexes = s.getVertex();

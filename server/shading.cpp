@@ -51,8 +51,9 @@ void linear_shading(triangle_t *triangle, std::vector<light_source_t*> &light_so
 
         if (k > 0) {
             sum_k += px * x + py * y + pz * z;
-            count++;
+//            count++;
         }
+        count++;
     }
 
     if (count > 0) {

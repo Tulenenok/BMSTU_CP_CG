@@ -14,7 +14,8 @@ int Handler::load_figure(screen_t *screen_matrix)
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
-    z_buffer_render(screen_matrix, polygons);
+//    z_buffer_render(screen_matrix, polygons);
+    threaded_z_buffer_render(screen_matrix, polygons);
     return 0;
 }
 
@@ -26,7 +27,8 @@ int Handler::scale(screen_t *screen_matrix, double kx, double ky, double kz)
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
-    z_buffer_render(screen_matrix, polygons);
+//    z_buffer_render(screen_matrix, polygons);
+    threaded_z_buffer_render(screen_matrix, polygons);
     return 0;
 }
 
@@ -39,7 +41,8 @@ int Handler::rotate(screen_t *screen_matrix, double ax, double ay, double az) {
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
-    z_buffer_render(screen_matrix, polygons);
+//    z_buffer_render(screen_matrix, polygons);
+    threaded_z_buffer_render(screen_matrix, polygons);
     return 0;
 }
 
@@ -48,7 +51,8 @@ int Handler::push(screen_t *screen_matrix, double dx, double dy, double dz) {
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
-    z_buffer_render(screen_matrix, polygons);
+//    z_buffer_render(screen_matrix, polygons);
+    threaded_z_buffer_render(screen_matrix, polygons);
     return 0;
 }
 
@@ -58,6 +62,7 @@ int Handler::add_light_source(screen_t *screen_matrix, double x, double y, doubl
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);
-    z_buffer_render(screen_matrix, polygons);
+//    z_buffer_render(screen_matrix, polygons);
+    threaded_z_buffer_render(screen_matrix, polygons);
     return 0;
 }
