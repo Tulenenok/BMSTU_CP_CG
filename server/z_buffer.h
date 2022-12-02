@@ -16,4 +16,6 @@ void z_buffer_render(screen_t *screen, std::vector<triangle_t*> triangles);
 void complete_process_level(screen_t *screen, std::vector<triangle_t*> triangles, int y);
 void process_level(triangle_t *triangle, screen_t *screen, int y, double *depth_arr);
 
+void threaded_z_buffer_render(screen_t *screen, const std::vector<triangle_t*> triangles);
+
 #endif //C_VERSION_Z_BUFFER_H

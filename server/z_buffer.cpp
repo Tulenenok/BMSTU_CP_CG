@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <thread>
 #include "z_buffer.h"
 
 //Фунуция работает не с изначальными координатами вершин, а с измененными!!!
@@ -174,6 +175,37 @@ void z_buffer_render(screen_t *screen, std::vector<triangle_t*> triangles)
 {
     for (int y = screen->height - 1; y >= 0; y--){
         complete_process_level(screen, triangles, y);
+    }
+
+}
+
+void threaded_z_buffer_render(screen_t *screen, const std::vector<triangle_t*> triangles)
+{
+    std::vector<std::thread> threads;
+
+    auto cores_count = std::thread::hardware_concurrency(); //Узнаем к-во ядер
+    int n = cores_count - 1;
+    std::cout << n << std::endl;
+
+//    std::thread t1([]() {
+//        complete_process_level((screen, triangles, y));
+//    });
+    int y;
+    for (int i = 0; i < screen->height / n + 1; i++) {
+//        std::vector<std::thread> threads;
+
+        for (int k = 0; k < n; k++) {
+            y = n * i + k;
+            if ( y < screen->height ) {
+                threads.push_back(std::thread(complete_process_level, screen, triangles, y));
+            }
+        }
+
+        for (int k = 0; k < threads.size(); k++) {
+            threads[k].join();
+        }
+
+        threads.clear();
     }
 
 }
