@@ -226,5 +226,7 @@ preset_setting_t MainWindow::getFractalForm()
     else if (c == 6)
         preset.color = {150, 75, 0};        // коричневый
 
+    preset.type_draw = ui->styleType->currentIndex();
+
     return preset;
 }

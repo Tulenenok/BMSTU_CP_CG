@@ -15,7 +15,12 @@ int Handler::load_figure(screen_t *screen_matrix, preset_setting_t& preset)
     std::cout << fractal.color.r;
 
     fractal.calculate();
-    fractal.generate_cubes(polygons);
+    if (preset.type_draw == 0)
+        fractal.generate_cubes(polygons);
+    else if (preset.type_draw == 1)
+        fractal.generate_spheres(polygons, 0);
+    else if (preset.type_draw == 2)
+        fractal.generate_spheres(polygons, 1);
 
     group_shading(polygons, light_sources);
     fill_screen(screen_matrix, &screen_matrix->default_color);

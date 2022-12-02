@@ -9,6 +9,7 @@ typedef struct{
     Params params;
     color_t color;
     int count_cubes;
+    int type_draw;
 } preset_setting_t;
 
 preset_setting_t get_spiral();

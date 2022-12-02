@@ -901,7 +901,12 @@
             </item>
             <item>
              <property name="text">
-              <string>Линия</string>
+              <string>Октаэдр</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Шар</string>
              </property>
             </item>
            </widget>

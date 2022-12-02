@@ -22,6 +22,7 @@ public:
 
     std::vector<Link> links;
     void generate_cubes(std::vector<triangle_t *> &polygons);
+    void generate_spheres(std::vector<triangle_t *> &polygons, int iters);
 
     color_t color;
     int default_n{3};       //  Дефолное количество кубиков на отрезок
