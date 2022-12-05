@@ -1,14 +1,8 @@
 **Мы один большой молодец**
 
-![telegram-cloud-photo-size-2-5195343508582547908-y](https://user-images.githubusercontent.com/78147880/204136560-0f787a76-b267-463b-8517-2f59556aa803.jpg)
+
+![IMAGE 2022-12-05 20:26:43](https://user-images.githubusercontent.com/78147880/205702592-d5cedb6d-74d4-49d0-a9b9-989d2ecfd2ad.jpg)
+
+![IMAGE 2022-12-05 20:26:52](https://user-images.githubusercontent.com/78147880/205702624-e56ee512-c3ce-4e33-b011-5130d8b6bd96.jpg)
 
 ---
-
-* Как залить себе в ветку актуальный main
-
-  ```bash
-  git pull main
-  git rebase main
-  
-  # Теоретически, здесь может возникнуть конфликт, но это поправимо
-  ```
